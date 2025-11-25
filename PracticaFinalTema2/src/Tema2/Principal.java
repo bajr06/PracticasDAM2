@@ -12,7 +12,7 @@ public class Principal {
 		String url = "jdbc:mysql://localhost:3306/jugueteria";
 		String usuario = "root";
 		String contrasenia = "songoku";
-		Connection conexion = null;
+		Connection conexion = null; 
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
