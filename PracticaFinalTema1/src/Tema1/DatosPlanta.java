@@ -1,4 +1,4 @@
-// package Tema1;
+package Tema1;
 
 public class DatosPlanta {
     private int codigo;
