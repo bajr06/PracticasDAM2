@@ -1,0 +1,21 @@
+insert into Juguete(Nombre, Descripcion, Precio, Cantidad_Stock) values("Ruination", "Un libro sobre la historia de las Islas de la Sombra del universo de Runaterra", 15.99, 50);
+insert into Juguete(Nombre, Descripcion, Precio, Cantidad_Stock) values("Ambessa", "Un libro sobre la historia de Ambessa, la Matriarca de la Guerra", 22.80, 80);
+insert into Juguete(Nombre, Precio, Cantidad_Stock) values("Pelota de Fútbol", 8.70, 100);
+insert into Juguete(Nombre, Precio, Cantidad_Stock) values("Pelota de Baloncesto", 9.00, 40);
+insert into Juguete(Nombre, Descripcion, Precio, Cantidad_Stock) values("AK-47 de juguete", "Arma de plástico con sonidos al arma real", 20.50, 10);
+insert into Empleado(Nombre, Cargo, Fecha_Ingreso) values("Thiago", "Jefe", "15/09/2024");
+insert into Empleado(Nombre, Cargo, Fecha_Ingreso) values("Ainhoa", "Cajero", "01/07/2025");
+insert into Empleado(Nombre, Cargo, Fecha_Ingreso) values("Bryan", "Cajero", "07/06/2016");
+insert into Empleado(Nombre, Cargo, Fecha_Ingreso) values("William", "Cajero", "11/12/2023");
+insert into Empleado(Nombre, Cargo, Fecha_Ingreso) values("Diana", "Cajero", "12/04/2020");
+insert into Zona(Nombre, Descripcion) values("Zona de Alta Densidad", "En caso de pedidos grandes y pesados, sacar de aquí");
+insert into Zona(Nombre, Descripcion) values("Zona de Media Densidad", "En caso de pedidos poco densos, sacar de aquí");
+insert into Zona(Nombre, Descripcion) values("Zona de Baja Densidad", "Para ventas al por menor");
+insert into Zona(Nombre) values("Refuerzo 1");
+insert into Zona(Nombre) values("Refuerzo 2");
+insert into Stand(ID_Stand, Nombre, Descripcion, Zona_ID_Zona) values();
+
+
+
+
+insert into Stock(Stand_ID_Stand, Stand_Zona_ID_Zona, Juguete_ID_Juguete, Cantidad);

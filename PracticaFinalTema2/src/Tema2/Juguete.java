@@ -8,19 +8,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Juguete {
-	private static String [] columnas = {"Nombre", "Descripcion", "Precio", "Cantidad_Stock"};
+	private static String [] columnasJ = {"Nombre", "Descripcion", "Precio", "Cantidad_Stock"};
+
+	public static List<Object> nuevoJ() {
+		List<Object> datos = new ArrayList<>();
+		Principal .sc.nextLine();
+		
+		IO.print("Introduzca el nombre: ");
+		datos.add(Principal.sc.nextLine());
+
+		IO.print("Introduzca una descripción: ");
+		datos.add(Principal.sc.nextLine());
+
+		IO.print("Introduzca el precio: ");
+		datos.add(Principal.sc.nextFloat());
+
+		IO.print("Introduzca la cantidad: ");
+		datos.add(Principal.sc.nextInt());
+
+		return datos;
+	}
 
 	public static void nuevoJuguete(Connection conexion) {
-		String nuevoJuguete = "insert into Juguete (Nombre, Descripcion, Precio, Cantidad_Stock) values (?, ?, ?, ?)";
-		
+		List<Object> datos = nuevoJ();
+
 		try {
+			String nuevoJuguete = "insert into Juguete (Nombre, Descripcion, Precio, Cantidad_Stock) values (?, ?, ?, ?)";
 			PreparedStatement ps = conexion.prepareStatement(nuevoJuguete, Statement.RETURN_GENERATED_KEYS);
 
-			Principal.sc.nextLine();
-			ps.setString(1, Principal.sc.nextLine());
-			ps.setString(2, Principal.sc.nextLine());
-			ps.setFloat(3, Principal.sc.nextFloat());
-			ps.setInt(4, Principal.sc.nextInt());
+			ps.setObject(1, datos.get(0));
+			ps.setObject(2, datos.get(1));
+			ps.setObject(3, datos.get(2));
+			ps.setObject(4, datos.get(3));
 
 			int rs = ps.executeUpdate();
 
@@ -35,7 +54,7 @@ public class Juguete {
 		}
 	}
 
-	public static List<Object> modificacion(int tipoCambio) {
+	public static List<Object> modificacionJ(int tipoCambio) {
 		List<Object> respuesta = new ArrayList<>();
 
 		System.out.println("Introduzca el ID del juguete: ");
@@ -50,6 +69,9 @@ public class Juguete {
 			respuesta.add(Principal.sc.nextFloat());
 		} else if(tipoCambio == 3) {
 			respuesta.add(Principal.sc.nextInt());
+		} else {
+			System.err.println("No existe la opción que has escogido, ¡Hasta la próxima!");
+			System.exit(tipoCambio);
 		}
 
 		return respuesta;
@@ -57,9 +79,9 @@ public class Juguete {
 
 	public static void modificarJuguete(Connection conexion) {
 		int seleccion = Opciones.modificarJuguete();
-		List<Object> cambios = modificacion(seleccion);
+		List<Object> cambios = modificacionJ(seleccion);
 
-		String modificarJuguete = "update Juguete set " + columnas[seleccion] + " = \"" + cambios.get(1) + "\" where ID_Juguete = ?";
+		String modificarJuguete = "update Juguete set " + columnasJ[seleccion] + " = \"" + cambios.get(1) + "\" where ID_Juguete = ?";
 
 		try {
 			PreparedStatement ps = conexion.prepareStatement(modificarJuguete);
@@ -72,7 +94,7 @@ public class Juguete {
 				System.err.println("Ha ocurrido un problema grave.");
 				System.exit(rs);
 			} else {
-				System.out.println("Se ha modificado correctamente el jueguete");
+				System.out.println("Se ha modificado correctamente el juguete");
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -85,6 +107,7 @@ public class Juguete {
 		try {
 			PreparedStatement ps = conexion.prepareStatement(eliminarJuguete);
 
+			System.out.println("Introduzca el ID del juguete a borrar: ");
 			ps.setInt(1, Principal.sc.nextInt());
 
 			int rs = ps.executeUpdate();
@@ -93,7 +116,7 @@ public class Juguete {
 				System.err.println("Ha ocurrido un problema grave.");
 				System.exit(rs);
 			} else {
-				System.out.println("Se ha eliminado correctamente el jueguete");
+				System.out.println("Se ha eliminado correctamente el juguete");
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

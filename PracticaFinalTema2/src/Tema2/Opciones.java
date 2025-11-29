@@ -38,13 +38,27 @@ public class Opciones {
         return Principal.sc.nextInt();
     }
 
-    public static void opcionesEmpleados() {
+    public static void opcionesEmpleados(Connection conexion) {
         System.out.println("Escoja la operación a realizar: ");
         IO.println("1. Registrar nuevo empleado");
         IO.println("2. Modificar los datos de un empleado");
         IO.println("3. Eliminar el empleado");
 
-        Principal.sc.nextInt();
+        switch (Principal.sc.nextInt()) {
+            case 1 -> Empleado.nuevoEmpleado(conexion);
+            case 2 -> Empleado.modificarEmpleado(conexion);
+            case 3 -> Empleado.eliminarEmpleado(conexion);
+            default -> System.err.println("Opción escogida no existente");
+        }
+    }
+
+    public static int modificarEmpleado() {
+        System.out.println("Introduzca el dato a cambiar del Empleado: ");
+        IO.println("0. Nombre");
+        IO.println("1. Puesto (\'Jefe\' o  \'Cajero\')");
+        IO.println("2. Fecha de incorporación");
+
+        return Principal.sc.nextInt();
     }
 
     public static void opcionesVentas() {
@@ -73,7 +87,7 @@ public class Opciones {
 		    do {
 			    switch (opcion1) {
 				    case 1 -> opcionesJuguetes(conexion);
-				    case 2 -> opcionesEmpleados();
+				    case 2 -> opcionesEmpleados(conexion);
 				    case 3 -> opcionesVentas();
 				    case 4 -> opcionesDatosTienda();
 				    case 5 -> IO.println("Usted ha salido del programa");

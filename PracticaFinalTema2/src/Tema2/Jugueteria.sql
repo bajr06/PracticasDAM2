@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `Jugueteria`.`Empleado` (
 	`ID_Empleado` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`Nombre` VARCHAR(20) NOT NULL,
 	`Cargo` ENUM('Jefe', 'Cajero') NOT NULL,
-	`Fecha_Ingreso` DATE NOT NULL,
+	`Fecha_Ingreso` VARCHAR(30) NOT NULL,
 	PRIMARY KEY (`ID_Empleado`),
 	UNIQUE INDEX `ID_Empleado_UNIQUE` (`ID_Empleado` ASC) VISIBLE)
 ENGINE = InnoDB
