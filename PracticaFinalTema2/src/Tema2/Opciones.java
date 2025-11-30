@@ -61,17 +61,24 @@ public class Opciones {
         return Principal.sc.nextInt();
     }
 
-    public static void opcionesVentas() {
+    public static void opcionesVentas(Connection conexion) {
         System.out.println("Escoja la operación a realizar: ");
         IO.println("1. Realizar una venta");
         IO.println("2. Realizar una devolución");
         IO.println("3. Producto más vendido");
         IO.println("4. Los empleados más vendidos");
 
-        Principal.sc.nextInt();
+        switch (Principal.sc.nextInt()) {
+            case 1 -> Ventas.realizarVenta(conexion);
+            case 2 -> Ventas.realizarDevolucion(conexion);
+            case 3 -> Ventas.masVendidos(conexion);
+            case 4 -> Ventas.masVentas(conexion);
+            default -> System.err.println("Opción escogida no existente");
+
+        }
     }
 
-    public static void opcionesDatosTienda() {
+    public static void opcionesDatosTienda(Connection conexion) {
         System.out.println("Escoja la operación a realizar");
         IO.println("1. Juguetes disponibles");
         IO.println("2. Ventas realizados en un mes");
@@ -79,7 +86,15 @@ public class Opciones {
         IO.println("4. Cambios de los empleados y motivos");
         IO.println("5. Juguetes ordenados por precio");
 
-        Principal.sc.nextInt();
+        switch (Principal.sc.nextInt()) {
+            case 1 -> DatosTienda.juguetesStand(conexion);
+            // case 2 -> DatosTienda.ventasPorMes(conexion);
+            // case 3 -> DatosTienda.ventasEmpleadoMes(conexion);
+            case 4 -> DatosTienda.verCambios(conexion);
+            case 5 -> DatosTienda.productosPorPrecio(conexion);
+            default -> System.err.println("Opción escogida no existente");
+
+        }
     }
 
     public static void opciones(Connection conexion) {
@@ -88,8 +103,8 @@ public class Opciones {
 			    switch (opcion1) {
 				    case 1 -> opcionesJuguetes(conexion);
 				    case 2 -> opcionesEmpleados(conexion);
-				    case 3 -> opcionesVentas();
-				    case 4 -> opcionesDatosTienda();
+				    case 3 -> opcionesVentas(conexion);
+				    case 4 -> opcionesDatosTienda(conexion);
 				    case 5 -> IO.println("Usted ha salido del programa");
 				    default -> IO.println("Número de opción incorrecto.");
 			    }

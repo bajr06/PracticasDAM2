@@ -16,15 +16,18 @@ public class Principal {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conexion = DriverManager.getConnection(url, usuario, contrasenia);
 
-		IO.println(conexion);
-
 		return conexion;
 	}
 
 	public static void main(String[] args) {
 		try {
 			Connection conexion = conexionBD();
-			Comprobacion.comprobarTablas(conexion);
+			
+			if (Comprobacion.comprobarTablas(conexion)) {
+				System.out.println("Todas las tablas tienen datos.");
+			} else {
+				System.err.println("No todas las tablas de la base de datos tienen datos, tenga cuidado.");
+			}
 
 			Opciones.opciones(conexion);
 		} catch (ClassNotFoundException | SQLException cnfsqle) {

@@ -2,6 +2,7 @@ package Tema2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class Juguete {
 
 			int rs = ps.executeUpdate();
 
-			if(rs == 0) {
+			if(rs <= 0) {
 				System.err.println("Ha ocurrido un problema grave.");
 				System.exit(rs);
 			} else {
@@ -120,6 +121,21 @@ public class Juguete {
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
+		}
+	}
+
+	public static double obtenerPrecio(Connection conexion,  int id_Juguete) throws SQLException{
+		String obtenerPrecio = "select Precio from Juguete where ID_Juguete = ?";
+		
+		PreparedStatement ps = conexion.prepareStatement(obtenerPrecio);
+		ps.setInt(1, id_Juguete);
+
+		ResultSet rs = ps.executeQuery();
+
+		if(rs.next()) {
+			return rs.getDouble("Precio");
+		} else {
+			return 0.0;
 		}
 	}
 }
