@@ -174,11 +174,11 @@ public class Principal {
 				switch (opcion) {
 					case 1 -> mostrarPlantas(datos);
 					case 2 -> modificarPlanta(datos);
-					case 0 -> System.out.println("👋 Cerrando sesión...");
-					default -> System.out.println("⚠️ Opción inválida.");
+					case 0 -> System.out.println("Cerrando sesión.");
+					default -> System.out.println("Opción inválida.");
 				}
 			} catch (Exception e) {
-				System.out.println("❌ Error: " + e.getMessage());
+				System.out.println("Error: " + e.getMessage());
 				opcion = -1;
 			}
 		} while (opcion != 0);
