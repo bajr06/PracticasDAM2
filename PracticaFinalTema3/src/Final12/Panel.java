@@ -1,12 +1,13 @@
 package Final12;
 
-import javax.swing.JButton;
+import javax.swing.JPanel;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class Panel {
+public class Panel extends JPanel {
     private JTextField miTextoATraducir;
 	private JLabel miEtiqueta1;
 	private JButton miBotonTraductor;
