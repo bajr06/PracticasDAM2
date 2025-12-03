@@ -7,8 +7,8 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventana window = new Ventana();
-					window.setVisible(true);
+					Ventana vc = new Ventana();
+					vc.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

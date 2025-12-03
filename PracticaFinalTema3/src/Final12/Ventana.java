@@ -4,7 +4,8 @@ import javax.swing.JFrame;
 
 public class Ventana extends JFrame {
 	// Tenemos estos métodos dentro del constructor porue heredamos las clases del padre, si quisieramos sobreescribir algún método, tendremos que usar el @Override.
-	public Ventana() {
+	public Ventana
+() {
 		setTitle("Traductor Inglés - Español"); 
 		setSize(800, 600); // El tamaño a dar.
 		setResizable(false); // Impide modificar el tamaño de la ventana.
