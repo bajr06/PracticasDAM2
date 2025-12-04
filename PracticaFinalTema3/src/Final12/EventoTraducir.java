@@ -12,7 +12,6 @@ public class EventoTraducir implements ActionListener {
     JTextField miTextoATraducir;
 	JLabel miEtiquetaTraducida3;
 	
-	
 	public EventoTraducir(JTextField miTextoATraducir, JLabel miEtiquetaTraducida3) {
 		this.miTextoATraducir = miTextoATraducir;
 		this.miEtiquetaTraducida3 = miEtiquetaTraducida3;
