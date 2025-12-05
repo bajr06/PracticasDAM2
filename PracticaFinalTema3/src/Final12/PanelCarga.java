@@ -2,18 +2,16 @@ package Final12;
 
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 public class PanelCarga extends JPanel {
-    protected static JProgressBar barraCarga;
+	protected static JProgressBar barraCarga;
 	protected static Timer tiempo;
 	private static final long serialVersionUID = 1L;
 	private BufferedImage fondo = null;
@@ -49,4 +47,3 @@ public class PanelCarga extends JPanel {
 		tiempo.start();
 	}
 }
-

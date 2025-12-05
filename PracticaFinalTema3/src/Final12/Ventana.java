@@ -2,9 +2,7 @@ package Final12;
 
 import java.awt.CardLayout;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
-
 import tema12.Ventana12;
 
 public class Ventana extends JFrame {
