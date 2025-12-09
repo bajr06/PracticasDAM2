@@ -15,18 +15,16 @@ public class Eventos implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getID() == 0) {
-			PanelCarga.barraCarga.setValue(i += 20);	
-			VerificacionFicheros.LecturaFicheros();
+			PanelCarga.barraCarga.setValue(i += 20);
 
-			if(i == 100) {
+			if(i == 100 && VerificacionFicheros.verificacionExistencia()) {
+				VerificacionFicheros.LecturaFicheros();
 				Ventana.pc.setVisible(false);
 				Ventana.ps.setVisible(true);
 				PanelCarga.tiempo.stop();
-			} else if(i == 80 && VerificacionFicheros.verificacionExistencia("Usuario.txt")) {
+			} else if(i == 80 && !VerificacionFicheros.verificacionExistencia()) {
 				mensaje = "Ha ocurrido un error de carga, se cerrara el programa.";
-
 				JOptionPane.showMessageDialog(null, mensaje, "ERROR", 0);
-
 				Principal.v.dispose();
 				System.exit(0);
 			}
