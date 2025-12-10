@@ -1,7 +1,12 @@
 package Final12;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
+
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -13,6 +18,7 @@ import javax.swing.Timer;
 public class PanelCarga extends JPanel {
 	protected static JProgressBar barraCarga;
 	protected static Timer tiempo;
+	protected static JLabel mostrarCarga;
 	private static final long serialVersionUID = 1L;
 	private BufferedImage fondo = null;
 	private Image foto = fondo;
@@ -36,11 +42,19 @@ public class PanelCarga extends JPanel {
 
 	public PanelCarga() {
 		setLayout(null);
-		buscarImagen();
+
+		mostrarCarga = new JLabel();
+		mostrarCarga.setForeground(new Color(0, 0, 0));
+		mostrarCarga.setFont(new Font("Tahoma", Font.BOLD, 15));
+		mostrarCarga.setBounds(150, 425, 500, 30);
+		mostrarCarga.setHorizontalAlignment(SwingConstants.CENTER);
+		add(mostrarCarga);
 
 		barraCarga = new JProgressBar();
 		barraCarga.setBounds(150, 400, 500, 30);
 		add(barraCarga);
+
+		buscarImagen();
 
 		tiempo = new Timer(35, new Eventos());
 		tiempo.start();

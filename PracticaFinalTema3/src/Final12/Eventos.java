@@ -16,9 +16,10 @@ public class Eventos implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getID() == 0) {
 			PanelCarga.barraCarga.setValue(i++);
+			PanelCarga.mostrarCarga.setText("Cargando: " + i + "%");
 
 			if(i > 100 /*&& VerificacionFicheros.verificacionExistencia()*/) {
-				VerificacionFicheros.LecturaFicheros();
+				VerificacionLecturaFicheros.LecturaFicheros();
 
 				Principal.reiniciarVentana();
 
@@ -26,10 +27,10 @@ public class Eventos implements ActionListener {
 				Ventana.ps.setVisible(true);
 				
 				PanelCarga.tiempo.stop();
-			} else if(i == 80 && VerificacionFicheros.verificacionExistencia()) {
+			} else if(i == 80 && VerificacionLecturaFicheros.verificacionExistencia()) {
 				mensaje = "Ha ocurrido un error de carga, se cerrara el programa.";
 				JOptionPane.showMessageDialog(null, mensaje, "ERROR", 0);
-				Principal.v1.dispose();
+				Principal.v.dispose();
 				System.exit(1);
 			}
 		} else if(e.getID() == 1001) {

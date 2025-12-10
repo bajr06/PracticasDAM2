@@ -5,10 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class VerificacionFicheros {
+public class VerificacionLecturaFicheros {
 	private static String [] nombreFicheros = {"Usuarios.txt", "Periodicos.txt"};
 
 	public static boolean verificacionExistencia() {
@@ -39,8 +38,7 @@ public class VerificacionFicheros {
 		try(BufferedReader br = new BufferedReader(new FileReader(fichero))) {
 			while((linea = br.readLine()) != null) {
 				datos = linea.split(";");
-				System.out.println(Arrays.asList(datos));
-				
+								
 				Usuario usuario = new Usuario(TipoUsuario.valueOf(datos[0]), datos[1], datos[2], datos[3], Boolean.valueOf(datos[4]));	
 				lista.add(usuario);
 			}
