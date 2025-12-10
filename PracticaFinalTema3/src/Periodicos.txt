@@ -1,0 +1,6 @@
+1;https://www.elconfidencial.com/;h3;
+2;https://elpais.com/;h2.c_t, h3.c_t;NACIONAL
+3;https://www.elespanol.com/;
+4;https://www.elmundo.es/;
+5;https://www.eleconomista.es/;
+6;https://www.marca.com/;

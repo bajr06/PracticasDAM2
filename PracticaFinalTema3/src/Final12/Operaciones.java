@@ -4,14 +4,18 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class Operaciones {
-	public static String traducir(String text) throws IOException {
-		String web = "https://www.spanishdict.com/translate/" + text;
+	public static void prueba() throws IOException {
+		String web = "https://elpais.com/espana/";
 		Document document = Jsoup.connect(web).get();
-		Element palabraTraducida = document.select("div#quickdef1-es a.tCur1iYh").get(0);
-		String palabra = palabraTraducida.html().toUpperCase();
-
-		return palabra;
+		Elements titulares = document.select("h2.c_t, h3.c_t");
+		
+		for (int i = 0; i < 3; i++) {
+			Element titular = titulares.get(i);
+			System.out.println((i+1) + ". " + titular.text());
+		}
 	}
 }
+

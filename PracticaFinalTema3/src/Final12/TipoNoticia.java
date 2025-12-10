@@ -1,0 +1,10 @@
+package Final12;
+
+public enum TipoNoticia {
+	ECONOMIA,
+	DEPORTES,
+	NACIONAL,
+	INTERNACIONAL,
+	TECNOLOGIA,
+	VIDEOJUEGOS
+};

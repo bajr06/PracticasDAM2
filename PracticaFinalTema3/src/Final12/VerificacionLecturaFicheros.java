@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VerificacionLecturaFicheros {
-	private static String [] nombreFicheros = {"Usuarios.txt", "Periodicos.txt"};
+	private static String [] nombreFicheros = {"PracticaFinalTema3/src/Usuarios.txt", "PracticaFinalTema3/src/Periodicos.txt"};
 
 	public static boolean verificacionExistencia() {
 		int existencia = 0;
@@ -21,6 +21,8 @@ public class VerificacionLecturaFicheros {
 				existencia--;
 			}
 		}
+
+		IO.println(existencia);
 
 		if(existencia == nombreFicheros.length) {
 			return true;
