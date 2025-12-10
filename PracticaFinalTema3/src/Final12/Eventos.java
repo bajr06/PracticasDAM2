@@ -8,25 +8,29 @@ import javax.swing.JOptionPane;
 public class Eventos implements ActionListener {
 	private int i = 0;
 	private String mensaje;
-
+	
 	public Eventos() {
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getID() == 0) {
-			PanelCarga.barraCarga.setValue(i += 20);
+			PanelCarga.barraCarga.setValue(i++);
 
-			if(i == 100 && VerificacionFicheros.verificacionExistencia()) {
+			if(i > 100 /*&& VerificacionFicheros.verificacionExistencia()*/) {
 				VerificacionFicheros.LecturaFicheros();
+
+				Principal.reiniciarVentana();
+
 				Ventana.pc.setVisible(false);
 				Ventana.ps.setVisible(true);
+				
 				PanelCarga.tiempo.stop();
-			} else if(i == 80 && !VerificacionFicheros.verificacionExistencia()) {
+			} else if(i == 80 && VerificacionFicheros.verificacionExistencia()) {
 				mensaje = "Ha ocurrido un error de carga, se cerrara el programa.";
 				JOptionPane.showMessageDialog(null, mensaje, "ERROR", 0);
-				Principal.v.dispose();
-				System.exit(0);
+				Principal.v1.dispose();
+				System.exit(1);
 			}
 		} else if(e.getID() == 1001) {
 			Ventana.ps.setVisible(false);

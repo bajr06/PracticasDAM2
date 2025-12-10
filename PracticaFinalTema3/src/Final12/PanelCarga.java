@@ -32,7 +32,6 @@ public class PanelCarga extends JPanel {
 		super.paintComponent(g);
 		g.drawImage(foto, 0, 0, 800, 500, null);
 	}
-
 	
 
 	public PanelCarga() {
@@ -43,7 +42,7 @@ public class PanelCarga extends JPanel {
 		barraCarga.setBounds(150, 400, 500, 30);
 		add(barraCarga);
 
-		tiempo = new Timer(1000, new Eventos());
+		tiempo = new Timer(35, new Eventos());
 		tiempo.start();
 	}
 }

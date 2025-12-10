@@ -11,7 +11,7 @@ public class Ventana extends JFrame {
 	protected static PanelUsuario pu;
 
 	// Tenemos estos métodos dentro del constructor porue heredamos las clases del padre, si quisieramos sobreescribir algún método, tendremos que usar el @Override.
-	public Ventana() {
+	public Ventana(int llamada) {
 		setTitle("Noticias \"Galio Informativo\""); 
 		setSize(800, 500); // El tamaño a dar.
 		getContentPane().setLayout(new CardLayout(0, 0));
@@ -19,13 +19,16 @@ public class Ventana extends JFrame {
 		setResizable(false); // Impide modificar el tamaño de la ventana.
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ventana12.class.getResource("/Pantheon_Perfil.jpg")));
 
-		pc = new PanelCarga();
-		getContentPane().add(pc);
+		if(llamada == 1) {
+			setUndecorated(true);
+			pc = new PanelCarga();
+			getContentPane().add(pc);
+		} else if(llamada == 2) {
+			ps = new PanelSesion();
+			add(ps);
 
-		ps = new PanelSesion();
-		add(ps);
-
-		pu = new PanelUsuario();
-		add(pu);
+			pu = new PanelUsuario();
+			add(pu);
+		}
 	}
 }
