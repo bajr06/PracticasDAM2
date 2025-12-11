@@ -8,7 +8,7 @@
 8;https://elpais.com/espana/ ;h2.c_t a;NACIONAL
 9;https://www.elespanol.com/espana/ ;h2;NACIONAL
 10;https://www.rtve.es/noticias/internacional/ ;h3;INTERNACIONAL
-11;https://cnnespanol.cnn.com/mundo ;span.container__headline-text:INTERNACIONAL
+11;https://cnnespanol.cnn.com/mundo ;span.container__headline-text;INTERNACIONAL
 12;https://www.europapress.es/internacional/ ;h2;INTERNACIONAL
 13;https://www.larazon.es/tecnologia/ ;h2;TECNOLOGIA
 14;https://www.xataka.com/tag/tecnologia ;h2;TECNOLOGIA

@@ -4,7 +4,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 public class PanelSesion extends JPanel {
@@ -13,7 +15,8 @@ public class PanelSesion extends JPanel {
 	private JLabel letreroUsuario;
 	private JTextField peticionUsuario;
 	private JLabel letreroContrasenya;
-	private JTextField peticionContrasenya;
+	protected static JPasswordField peticionContrasenya;
+	protected static JToggleButton verContrasenya;
 	private JButton verificarCredenciales;
 
 	public PanelSesion() {
@@ -40,17 +43,22 @@ public class PanelSesion extends JPanel {
 		peticionUsuario.setColumns(10);
 		add(peticionUsuario);
 
-		letreroContrasenya = new JLabel("Nombre de usuario o correo:");
+		letreroContrasenya = new JLabel("Contraseña:");
 		letreroContrasenya.setBounds(200, 250, 400, 14);
 		add(letreroContrasenya);
 
-		peticionContrasenya = new JTextField();
+		peticionContrasenya = new JPasswordField();
 		peticionContrasenya.setColumns(10);
 		peticionContrasenya.setBounds(200, 270, 400, 20);
 		add(peticionContrasenya);
 
+		verContrasenya = new JToggleButton("Mostrar");
+		verContrasenya.setBounds(610, 270, 80, 20);
+		verContrasenya.addActionListener(new Eventos());
+		add(verContrasenya);
+
 		verificarCredenciales = new JButton("Iniciar sesion");
-		verificarCredenciales.setBounds(633, 427, 122, 23);
+		verificarCredenciales.setBounds(630, 430, 140, 20);
 		verificarCredenciales.addActionListener(new Eventos());
 		add(verificarCredenciales);
 	}
