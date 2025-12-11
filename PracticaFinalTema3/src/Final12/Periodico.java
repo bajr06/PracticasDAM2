@@ -1,6 +1,6 @@
 package Final12;
 
-public class Periodicos {
+public class Periodico {
 	private int idPeriodico;
 	private String urlPeriodico;
 	private String contenedorNoticia;
@@ -35,7 +35,7 @@ public class Periodicos {
 	}
 
 
-	public Periodicos(int idPeriodico, String urlPeriodico, String contenedorNoticia, TipoNoticia tn) {
+	public Periodico(int idPeriodico, String urlPeriodico, String contenedorNoticia, TipoNoticia tn) {
 		this.idPeriodico = idPeriodico;
 		this.urlPeriodico = urlPeriodico;
 		this.contenedorNoticia = contenedorNoticia;

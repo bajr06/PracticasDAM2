@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VerificacionLecturaFicheros {
+public class ManejoFicheros {
 	private static String [] nombreFicheros = {"PracticaFinalTema3/src/Usuarios.txt", "PracticaFinalTema3/src/Periodicos.txt", "PracticaFinalTema3/src/Historico.txt"};
 
 	public static boolean verificacionExistencia() {
@@ -29,7 +29,7 @@ public class VerificacionLecturaFicheros {
 		}
 	}
 
-	public static void LecturaUsuarios() throws IOException {
+	public static List<Usuario> LecturaUsuarios() throws IOException {
 		File fichero = new File("PracticaFinalTema3\\src\\Usuarios.txt");
 		String linea;
 		String [] datos;
@@ -41,29 +41,29 @@ public class VerificacionLecturaFicheros {
 								
 			Usuario usuario = new Usuario(TipoUsuario.valueOf(datos[0]), datos[1], datos[2], datos[3], Boolean.valueOf(datos[4]));	
 			lista.add(usuario);
-
-			// IO.println(usuario.toString());
 		}
 
 		br.close();
+
+		return lista;
 	}
 
-	public static void LecturaPeriodicos() throws IOException {
+	public static List<Periodico> LecturaPeriodicos() throws IOException {
 		File fichero = new File("PracticaFinalTema3/src/Periodicos.txt");
 		String linea;
 		String [] datos;
-		List<Periodicos> lista = new ArrayList<>();
+		List<Periodico> lista = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(fichero));
 
 		while((linea = br.readLine()) != null) {
 			datos = linea.split(";");
 				
-			Periodicos periodico = new Periodicos(Integer.parseInt(datos[0]), datos[1], datos[2], TipoNoticia.valueOf(datos[3]));
+			Periodico periodico = new Periodico(Integer.parseInt(datos[0]), datos[1], datos[2], TipoNoticia.valueOf(datos[3]));
 			lista.add(periodico);
-
-			// IO.println(periodico.toString());
 		}
 
 		br.close();
+
+		return lista;
 	}
 }

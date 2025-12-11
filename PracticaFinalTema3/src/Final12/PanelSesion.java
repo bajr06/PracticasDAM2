@@ -10,11 +10,8 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 public class PanelSesion extends JPanel {
-    private JLabel letreroBienvenida;
-	private JLabel letreroPeticion;
-	private JLabel letreroUsuario;
-	private JTextField peticionUsuario;
-	private JLabel letreroContrasenya;
+    private JLabel letreroBienvenida, letreroPeticion, letreroUsuario, letreroContrasenya;
+	protected static JTextField peticionUsuario;
 	protected static JPasswordField peticionContrasenya;
 	protected static JToggleButton verContrasenya;
 	private JButton verificarCredenciales;
@@ -58,7 +55,7 @@ public class PanelSesion extends JPanel {
 		add(verContrasenya);
 
 		verificarCredenciales = new JButton("Iniciar sesion");
-		verificarCredenciales.setBounds(630, 430, 140, 20);
+		verificarCredenciales.setBounds(650, 400, 120, 20);
 		verificarCredenciales.addActionListener(new Eventos());
 		add(verificarCredenciales);
 	}
