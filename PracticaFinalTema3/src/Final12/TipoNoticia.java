@@ -2,9 +2,9 @@ package Final12;
 
 public enum TipoNoticia {
 	ECONOMIA,
-	DEPORTES,
+	DEPORTE,
 	NACIONAL,
 	INTERNACIONAL,
 	TECNOLOGIA,
-	VIDEOJUEGOS
+	VIDEOJUEGO
 };

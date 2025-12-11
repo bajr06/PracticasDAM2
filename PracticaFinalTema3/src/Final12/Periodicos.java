@@ -34,10 +34,17 @@ public class Periodicos {
 		this.tn = tn;
 	}
 
+
 	public Periodicos(int idPeriodico, String urlPeriodico, String contenedorNoticia, TipoNoticia tn) {
 		this.idPeriodico = idPeriodico;
 		this.urlPeriodico = urlPeriodico;
 		this.contenedorNoticia = contenedorNoticia;
 		this.tn = tn;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Periodicos [ID del Periodico = " + idPeriodico + ", URL del Periodico = " + urlPeriodico + ", Contenedor de la Noticia = " + contenedorNoticia + ", Tipo de Noticia = " + tn + "]";
 	}
 }

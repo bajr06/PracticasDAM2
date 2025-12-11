@@ -1,6 +1,18 @@
-1;https://www.elconfidencial.com/;h3;
-2;https://elpais.com/;h2.c_t, h3.c_t;NACIONAL
-3;https://www.elespanol.com/;
-4;https://www.elmundo.es/;
-5;https://www.eleconomista.es/;
-6;https://www.marca.com/;
+1;https://www.elmundo.es/economia.html;h2;ECONOMIA
+2;https://www.eleconomista.es/economia/; h2;ECONOMIA
+3;https://www.expansion.com/economia.html?intcmp=MENUHOM24101&s_kw=economia ;h2;ECONOMIA
+4;https://www.marca.com/ ;h2;DEPORTE
+5;https://as.com/; h3;DEPORTE
+6;https://espndeportes.espn.com/; div.contentItem__titleWrapper h2;DEPORTE
+7;https://www.elconfidencial.com/espana/ ;h3;NACIONAL
+8;https://elpais.com/espana/ ;h2.c_t a;NACIONAL
+9;https://www.elespanol.com/espana/ ;h2;NACIONAL
+10;https://www.rtve.es/noticias/internacional/ ;h3;INTERNACIONAL
+11;https://cnnespanol.cnn.com/mundo ;span.container__headline-text:INTERNACIONAL
+12;https://www.europapress.es/internacional/ ;h2;INTERNACIONAL
+13;https://www.larazon.es/tecnologia/ ;h2;TECNOLOGIA
+14;https://www.xataka.com/tag/tecnologia ;h2;TECNOLOGIA
+15;https://vandal.elespanol.com/noticias/tecnologia ;h2.titulocaja;TECNOLOGIA
+16;https://www.lne.es/tags/videojuegos/ ;a.new__headline h1;VIDEOJUEGO
+17;https://www.elespectador.com/tecnologia/videojuegos/ ;h2.Card-Title;VIDEOJUEGO
+18;https://www.elperiodico.com/es/videojuegos/ ;h2.ft-org-cardHome__mainTitle;VIDEOJUEGO
