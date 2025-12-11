@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 public class Eventos implements ActionListener {
+	private char caracter;
 	private int i = 0;
 	private boolean verificacion = VerificacionLecturaFicheros.verificacionExistencia();
 	private String mensaje;
@@ -23,11 +24,11 @@ public class Eventos implements ActionListener {
 			case "Mostrar":
 				mostrarContrasenya();
 				break;
-			case "Iniciar Sesion":
+			case "Iniciar sesion":
 				cambioPanel1();
 				break;
 			default:
-				IO.println(e.getID());
+				IO.println(e.getActionCommand());
 				mensaje = "Accion no reconocida. Cerrando programa.";
 				JOptionPane.showMessageDialog(null, mensaje, "ERROR", 0);
 				break;
@@ -62,16 +63,18 @@ public class Eventos implements ActionListener {
 	}
 
 	private void mostrarContrasenya() {
+		
 		if(PanelSesion.verContrasenya.isSelected()) {
+			caracter = PanelSesion.peticionContrasenya.getEchoChar();
 			PanelSesion.peticionContrasenya.setEchoChar((char)0);
 		} else {
-			PanelSesion.peticionContrasenya.setEchoChar('*');
+			PanelSesion.peticionContrasenya.setEchoChar(caracter);
 		}
 	}
 
 
 	private void cambioPanel1() {
 		Ventana.ps.setVisible(false);
-		Ventana.pu.setVisible(true);
+		Ventana.ppv.setVisible(true);
 	}
 }

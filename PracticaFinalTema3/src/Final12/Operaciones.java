@@ -6,11 +6,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 public class Operaciones {
-	public static void prueba() throws IOException {
-		String web = "https://www.elperiodico.com/es/videojuegos/";
-		Document document = Jsoup.connect(web).get();
-		Element titular = document.select("h2.ft-org-cardHome__mainTitle").get(0);
-		System.out.println((1) + ". " + titular.text());
+	public static String prueba(String periodico, String seccionTitular) throws IOException {
+		Document document = Jsoup.connect(periodico).get();
+		Element titular = document.select(seccionTitular).get(0);
+		
+		return (1) + ". " + titular.text();
 	}
 }
 

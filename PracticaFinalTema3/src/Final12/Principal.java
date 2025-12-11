@@ -11,8 +11,6 @@ public class Principal {
 				try {
 					v = new Ventana(1);
 					v.setVisible(true);
-
-					Operaciones.prueba();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

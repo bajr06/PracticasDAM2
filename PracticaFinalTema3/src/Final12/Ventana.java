@@ -9,6 +9,7 @@ public class Ventana extends JFrame {
 	protected static PanelCarga pc;
 	protected static PanelSesion ps;
 	protected static PanelUsuario pu;
+	protected static PanelPrimezaVez ppv; 
 
 	// Tenemos estos métodos dentro del constructor porque heredamos las clases del padre, si quisieramos sobreescribir algún método, tendremos que usar el @Override
 	public Ventana(int llamada) {
@@ -26,9 +27,14 @@ public class Ventana extends JFrame {
 		} else if(llamada == 2) {
 			ps = new PanelSesion();
 			add(ps);
+			
+			ppv = new PanelPrimezaVez();
+			add(ppv);
 
 			pu = new PanelUsuario();
 			add(pu);
+
+
 		}
 	}
 }
