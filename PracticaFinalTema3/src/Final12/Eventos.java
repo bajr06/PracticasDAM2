@@ -2,6 +2,7 @@ package Final12;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JCheckBox;
@@ -11,8 +12,8 @@ public class Eventos implements ActionListener {
 	private char caracter;
 	private int i = 0;
 	private boolean verificacion = ManejoFicheros.verificacionExistencia();
-	private List<Usuario> listaUsuarios;
-	private List<Periodico> listaPeriodicos;
+	private static List<Usuario> listaUsuarios;
+	private static List<Periodico> listaPeriodicos;
 
 	private JCheckBox [] opciones = {
 		PanelPrimezaVez.seleccionEconomia_1,
@@ -45,7 +46,6 @@ public class Eventos implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			case null:
-				lecturaFicheros(); // TODO
 				eventoCarga();
 				break;
 			case "Mostrar":
@@ -56,6 +56,15 @@ public class Eventos implements ActionListener {
 				break;
 			case "Confirmar":
 				guardarSelecciones();
+				break;
+			case "Crear Usuario":
+				nuevoUsuario();
+				break;
+			case "Borrar Usuario":
+				borrarUsuario();
+				break;
+			case "Testear Noticias":
+				testearNoticias();
 				break;
 			case "Acerca de":
 				mostrarDatosAplicacion();
@@ -81,6 +90,10 @@ public class Eventos implements ActionListener {
 		PanelCarga.barraCarga.setValue(i++);
 		PanelCarga.mostrarCarga.setText("Cargando: " + i + "%");
 
+		if(i == 80) {
+			lecturaFicheros();
+		}
+
 		if(i == 100 && (verificacion || captura == null)) {
 			Principal.reiniciarVentana();
 			Ventana.pc.setVisible(false);
@@ -89,8 +102,7 @@ public class Eventos implements ActionListener {
 		} else if(i == 80 && (!verificacion || captura != null)) {
 			PanelCarga.tiempo.stop();
 
-			mensaje = "Ha ocurrido un error de carga de los ficheros, se cerrara el programa.";
-			JOptionPane.showMessageDialog(null, mensaje, "ERROR", 0);
+			error();
 
 			Principal.v.dispose();
 			System.exit(1);
@@ -107,8 +119,6 @@ public class Eventos implements ActionListener {
 	}
 
 	private void cambioPanel() {
-		lecturaFicheros();
-
 		for(Usuario u : listaUsuarios) {
 			if((u.getNombreUsuario().equals(PanelSesion.peticionUsuario.getText())) && (u.getContrasenia().equals(new String(PanelSesion.peticionContrasenya.getPassword())))){
 				if(u.getTu() == TipoUsuario.USUARIO && u.isPrimeraVez()) {
@@ -120,8 +130,11 @@ public class Eventos implements ActionListener {
 				} else if(u.getTu() == TipoUsuario.ADMINISTRADOR) {
 					Ventana.ps.setVisible(false);
 					Ventana.pa.setVisible(true);
-				}
-			}
+				} 
+			}/* else {
+				JOptionPane.showMessageDialog(null, "Datos introducidos incorrectos", "ERROR", 0);
+
+			}*/
 		}
 	}
 
@@ -135,8 +148,52 @@ public class Eventos implements ActionListener {
 		}
 	}
 
+	private void nuevoUsuario() {
+		String nombreUsuario = JOptionPane.showInputDialog("Introduzca el Nombre: ");
+		String contraseña = JOptionPane.showInputDialog("Introduzca la Contraseña: ");
+		String correoElectronico = JOptionPane.showInputDialog("Introduzca un Correo Electrónico: ");
+
+		Usuario nuevoUsuario = new Usuario(listaUsuarios.size() + 1, nombreUsuario, contraseña, correoElectronico, true, TipoUsuario.USUARIO);
+		listaUsuarios.add(nuevoUsuario);
+		
+		try {
+			Operaciones.escribirUsuario(nuevoUsuario);
+		} catch(Exception e) {
+			error();
+			Principal.v.dispose();
+			System.exit(1);
+		}
+	}
+
+	private void borrarUsuario() {
+		int idUsuarioBorrar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del usuario a borrar: "));
+		Usuario buscar = null;
+
+		for(Usuario u : listaUsuarios) {
+			if(u.getIdUsuario() == idUsuarioBorrar) {
+				buscar = u;
+
+				try {
+					Operaciones.borrarUsuario(u, idUsuarioBorrar);
+				} catch (IOException ioe) {
+					error();
+				}
+			}
+		}
+
+		listaUsuarios.remove(buscar);
+	}
+
+	private void testearNoticias() {}
+
+	private void error() {
+		mensaje = "Ha ocurrido un error grave. Cerrando Programa";
+		JOptionPane.showMessageDialog(null, mensaje, "ERROR", 0);
+
+	}
+
 	private void mostrarDatosAplicacion() {
-		mensaje = "Versión: 1.0\n Creada por: Bryan Andreu Jiménez Rojas";
+		mensaje = "Versión: 1.0\nCreada por: Bryan Andreu Jiménez Rojas";
 		JOptionPane.showMessageDialog(null, mensaje, "ACERCA DE", 1);
 	}
 }

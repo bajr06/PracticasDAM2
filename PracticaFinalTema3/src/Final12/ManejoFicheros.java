@@ -39,7 +39,7 @@ public class ManejoFicheros {
 		while((linea = br.readLine()) != null) {
 			datos = linea.split(";");
 								
-			Usuario usuario = new Usuario(TipoUsuario.valueOf(datos[0]), datos[1], datos[2], datos[3], Boolean.valueOf(datos[4]));	
+			Usuario usuario = new Usuario(Integer.parseInt(datos[0]), datos[1], datos[2], datos[3], Boolean.valueOf(datos[4]), TipoUsuario.valueOf(datos[5]));	
 			lista.add(usuario);
 		}
 

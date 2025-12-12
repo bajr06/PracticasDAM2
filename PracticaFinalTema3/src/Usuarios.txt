@@ -1,3 +1,7 @@
-USUARIO;Bryan;abc123;bryanandreujimenezrojas@outlook.es;true
-USUARIO;Ainhoa;def456;ainhoacatherine@outlook.es;true
-ADMINISTRADOR;Sergio;ghi789;sergio@outlook.es;null
+1;Bryan;abc123;bryanandreujimenezrojas@outlook.es;true;USUARIO
+2;Ainhoa;def456;ainhoacatherine@outlook.es;true;USUARIO
+3;Sergio;ghi789;sergio@outlook.es;null;ADMINISTRADOR
+4;Noemi;jkl123;noemi@salesianosdosa.com;true;USUARIO
+5;Jose;mno456;josedelucas@gmail.com;true;USUARIO
+7;Hola;prueba;prueba2;true;USUARIO
+8;Sans;AMong;Us;true;USUARIO

@@ -1,11 +1,12 @@
 package Final12;
 
 import java.awt.CardLayout;
+import java.awt.ComponentOrientation;
 import java.awt.Toolkit;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class Ventana extends JFrame {
 	protected static PanelCarga pc;
@@ -15,7 +16,8 @@ public class Ventana extends JFrame {
 	protected static PanelAdministrador pa;
 	
 	protected static JMenuBar barraMenu;
-	protected static JButton datosAplicacion;
+	private JMenu menu;
+	protected JMenuItem datosAplicacion;
 
 	public Ventana(int llamada) {
 		setTitle("Noticias \"Galio Informativo\""); 
@@ -32,11 +34,15 @@ public class Ventana extends JFrame {
 			getContentPane().add(pc);
 		} else if(llamada == 2) {
 			barraMenu = new JMenuBar();
+			barraMenu.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 			setJMenuBar(barraMenu);
 
-			datosAplicacion = new JButton("Acerca de");
+			menu = new JMenu("Ayuda");
+			barraMenu.add(menu);
+
+			datosAplicacion = new JMenuItem("Acerca de");
 			datosAplicacion.addActionListener(new Eventos());
-			barraMenu.add(datosAplicacion);
+			menu.add(datosAplicacion);
 
 			ps = new PanelSesion();
 			add(ps);

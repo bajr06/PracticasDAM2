@@ -1,17 +1,18 @@
 package Final12;
 
 public class Usuario {
-	private TipoUsuario tu;
+	private int idUsuario;
 	private String nombreUsuario;
 	private String contrasenia;
 	private String correoElectronico;
 	private boolean primeraVez;
+	private TipoUsuario tu;
 	
-	public TipoUsuario getTu() {
-		return tu;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
-	public void setTu(TipoUsuario tu) {
-		this.tu = tu;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNombreUsuario() {
@@ -42,16 +43,25 @@ public class Usuario {
 		this.primeraVez = primeraVez;
 	}
 
-	public Usuario(TipoUsuario tu, String nombreUsuario, String contrasenia, String correoElectronico, boolean primeraVez) {
+	public TipoUsuario getTu() {
+		return tu;
+	}
+	public void setTu(TipoUsuario tu) {
 		this.tu = tu;
+	}
+
+	
+	public Usuario(int idUsuario, String nombreUsuario, String contrasenia, String correoElectronico, boolean primeraVez, TipoUsuario tu) {
+		this.idUsuario = idUsuario;
 		this.nombreUsuario = nombreUsuario;
 		this.contrasenia = contrasenia;
 		this.correoElectronico = correoElectronico;
 		this.primeraVez = primeraVez;
+		this.tu = tu;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario: [Tipo de Usuario = " + tu.toString() + ", Nombre del Usuario = " + nombreUsuario + ", Contraseña = " + contrasenia + ", Correo Electrónico = " + correoElectronico + ", Primer incio de sesión = " + primeraVez + "]";
+		return "Usuario: [ID del Usuario = " + idUsuario + ", Nombre del Usuario = " + nombreUsuario + ", Contraseña = " + contrasenia + ", Correo Electrónico = " + correoElectronico + ", Primer incio de sesión = " + primeraVez + " Tipo de Usuario = " + tu.toString() + "]";
 	}
 }
