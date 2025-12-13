@@ -14,6 +14,7 @@ public class PanelSesion extends JPanel {
 	protected static JTextField peticionUsuario;
 	protected static JPasswordField peticionContrasenya;
 	protected static JToggleButton verContrasenya;
+	protected static JButton cerrarPrograma;
 	private JButton verificarCredenciales;
 
 	public PanelSesion() {
@@ -53,6 +54,11 @@ public class PanelSesion extends JPanel {
 		verContrasenya.setBounds(610, 270, 80, 20);
 		verContrasenya.addActionListener(new Eventos());
 		add(verContrasenya);
+
+		cerrarPrograma = new JButton("Cerrar");
+		cerrarPrograma.setBounds(350, 400, 100, 20);
+		cerrarPrograma.addActionListener(new Eventos());
+		add(cerrarPrograma);
 
 		verificarCredenciales = new JButton("Iniciar sesion");
 		verificarCredenciales.setBounds(650, 400, 120, 20);

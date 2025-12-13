@@ -29,6 +29,9 @@ public class PanelPrimezaVez extends JPanel {
 	private JLabel seccionVideojuego;
 	protected static JCheckBox seleccionVideojuego_1, seleccionVideojuego_2, seleccionVideojuego_3;
 
+	protected static JButton retroceder;
+	protected static JButton cerrarPrograma;
+
 	protected static JButton selecciones;
 
 	public PanelPrimezaVez() {
@@ -136,6 +139,16 @@ public class PanelPrimezaVez extends JPanel {
 		seleccionVideojuego_3 = new JCheckBox("El Periódico");
 		seleccionVideojuego_3.setBounds(575, 310, 140, 20);
 		add(seleccionVideojuego_3);
+
+		retroceder = new JButton("Atras");
+		retroceder.setBounds(150, 400, 100, 20);
+		retroceder.addActionListener(new Eventos());
+		add(retroceder);
+
+		cerrarPrograma = new JButton("Cerrar");
+		cerrarPrograma.setBounds(350, 400, 100, 20);
+		cerrarPrograma.addActionListener(new Eventos());
+		add(cerrarPrograma);
 
 		selecciones = new JButton("Confirmar");
 		selecciones.setBounds(650, 400, 120, 20);

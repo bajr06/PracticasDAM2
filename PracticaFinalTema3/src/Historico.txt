@@ -1,0 +1,9 @@
+3;13/12/2025 00:26:58;NACIONAL;1. El PSOE gallego implosiona: Besteiro conocía desde octubre las denuncias contra Tomé;https://www.elconfidencial.com/espana/ 
+3;13/12/2025 00:27:47;NACIONAL;1. El PSOE gallego implosiona: Besteiro conocía desde octubre las denuncias contra Tomé;https://www.elconfidencial.com/espana/ 
+3;13/12/2025 00:30:49;NACIONAL;1. El PSOE gallego implosiona: Besteiro conocía desde octubre las denuncias contra Tomé;https://www.elconfidencial.com/espana/ 
+5;13/12/2025 00:32:06;DEPORTE;1. Un nuevo reajuste... que será inédito;https://www.marca.com/ 
+5;13/12/2025 00:32:06;NACIONAL;1. Yolanda Díaz exige a Sánchez una “remodelación profunda” del Gobierno: “Así no podemos aguantar”;https://elpais.com/espana/ 
+5;13/12/2025 00:32:07;INTERNACIONAL;1. Trump anuncia que Camboya y Tailandia cesarán "esta noche" el cruce de ataques fronterizos;https://www.europapress.es/internacional/ 
+5;13/12/2025 00:32:07;TECNOLOGIA;1. “El riesgo no es que la IA te sustituya, sino que te sustituya alguien que sepa trabajar con IA”;https://www.larazon.es/tecnologia/ 
+5;13/12/2025 00:32:07;VIDEOJUEGO;1. Estos son los videojuegos más importantes anunciados durante The Game Awards 2025;https://www.elespectador.com/tecnologia/videojuegos/ 
+3;13/12/2025 01:07:28;NACIONAL;1. El PSOE gallego implosiona: Besteiro conocía desde octubre las denuncias contra Tomé;https://www.elconfidencial.com/espana/ 

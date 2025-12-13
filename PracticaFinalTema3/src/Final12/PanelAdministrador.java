@@ -10,11 +10,14 @@ import javax.swing.SwingConstants;
 public class PanelAdministrador extends JPanel{
 	private JLabel bienvenidaAdministrador, explicacion;
 	protected static JButton crearUsuario, borrarUsuario, testeoNoticias;
+	protected static JButton cerrarPrograma;
+	protected static JButton retroceder;
 
 	public PanelAdministrador() {
 		setLayout(null);
+		setVisible(true);
 
-		bienvenidaAdministrador = new JLabel("Bienvenido " /*+ Administrador*/);
+		bienvenidaAdministrador = new JLabel("Bienvenido al Menu de Administrador");
 		bienvenidaAdministrador.setBounds(125, 50, 550, 30);
 		bienvenidaAdministrador.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		bienvenidaAdministrador.setHorizontalAlignment(SwingConstants.CENTER);
@@ -39,5 +42,15 @@ public class PanelAdministrador extends JPanel{
 		testeoNoticias.setBounds(525, 200, 140, 20);
 		testeoNoticias.addActionListener(new Eventos());
 		add(testeoNoticias);
+
+		cerrarPrograma = new JButton("Cerrar");
+		cerrarPrograma.setBounds(350, 400, 100, 20);
+		cerrarPrograma.addActionListener(new Eventos());
+		add(cerrarPrograma);
+
+		retroceder = new JButton("Atras");
+		retroceder.setBounds(150, 400, 100, 20);
+		retroceder.addActionListener(new Eventos());
+		add(retroceder);
 	}
 }
