@@ -44,8 +44,8 @@ public class ManejoFicheros {
 		return datosGuardados;
 	}
 
-	public static List<Usuario> LecturaUsuarios() throws IOException {
-		File fichero = new File("PracticaFinalTema3\\src\\Usuarios.txt");
+	public static List<Usuario> lecturaUsuarios() throws IOException {
+		File fichero = new File("PracticaFinalTema3//src//Usuarios.txt");
 		String linea;
 		String [] datos;
 		List<Usuario> lista = new ArrayList<>();
@@ -63,7 +63,7 @@ public class ManejoFicheros {
 		return lista;
 	}
 
-	public static List<Periodico> LecturaPeriodicos() throws IOException {
+	public static List<Periodico> lecturaPeriodicos() throws IOException {
 		File fichero = new File("PracticaFinalTema3/src/Periodicos.txt");
 		String linea;
 		String [] datos;
@@ -73,12 +73,7 @@ public class ManejoFicheros {
 
 		while((linea = br.readLine()) != null) {
 			datos = linea.split(";");
-			
-			if(datos[4].equals("nada")) {
-				periodico = new Periodico(Integer.parseInt(datos[0]), datos[1], datos[2], TipoNoticia.valueOf(datos[3]), null);
-			} else {
-				periodico = new Periodico(Integer.parseInt(datos[0]), datos[1], datos[2], TipoNoticia.valueOf(datos[3]), datos[4].split("¿"));
-			}
+			periodico = new Periodico(Integer.parseInt(datos[0]), datos[1], datos[2], TipoNoticia.valueOf(datos[3]));
 
 			lista.add(periodico);
 		}

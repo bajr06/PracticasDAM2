@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -75,6 +74,8 @@ public class Operaciones {
 		bw.close();
 	}
 
+	
+	/*
 	public static void anyadirSelecciones(int selecciones, Periodico periodico, Usuario usuario) {
 		String[] seleccionesActuales = periodico.getSelecciones();
 		String idUsuario = String.valueOf(usuario.getIdUsuario());
@@ -91,6 +92,7 @@ public class Operaciones {
 
 		periodico.setSelecciones(nuevoArray);
 	}
+	*/
 
 	public static void reescribirUsuarios(List<Usuario> listaUsuarios) throws IOException {
 		BufferedWriter pw = new BufferedWriter(new FileWriter(ficheroUsuario)); 
@@ -160,10 +162,10 @@ public class Operaciones {
 	    }
 	}
 
-	public static void escribirHistorico(Usuario usuario, Periodico periodico, String titular) throws IOException {
+	public static void escribirHistorico(Usuario usuario, String tipoNoticia, String titular, String url) throws IOException {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 		String fechaHora = LocalDateTime.now().format(dtf);
-		String linea = String.format("%d;%s;%s;%s;%s", usuario.getIdUsuario(), fechaHora, periodico.getTn().toString(), titular.replace(";", ",").replace("\n", " "), periodico.getUrlPeriodico());
+		String linea = String.format("%d;%s;%s;%s;%s", usuario.getIdUsuario(), fechaHora, tipoNoticia, titular.replace(";", ",").replace("\n", " "), url);
 
 		BufferedWriter pw = new BufferedWriter(new FileWriter(ficheroHistorico, true)); 
 		pw.write(linea);

@@ -3,7 +3,6 @@ package Final12;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JCheckBox;
@@ -16,6 +15,7 @@ public class Eventos implements ActionListener {
 	private boolean verificacion = ManejoFicheros.verificacionExistencia();
 	private static List<Usuario> listaUsuarios;
 	private static List<Periodico> listaPeriodicos;
+	private static List<String []> listaHistorico;
 
 	protected static Usuario usuarioSesion;
 
@@ -91,8 +91,9 @@ public class Eventos implements ActionListener {
 
 	private void lecturaFicheros() {
 		try {
-			listaUsuarios = ManejoFicheros.LecturaUsuarios();
-			listaPeriodicos = ManejoFicheros.LecturaPeriodicos();
+			listaUsuarios = ManejoFicheros.lecturaUsuarios();
+			listaPeriodicos = ManejoFicheros.lecturaPeriodicos();
+			listaHistorico = ManejoFicheros.lectura("PracticaFinalTema3/src/Historico.txt");
 		} catch(Exception ex) {
 			captura = ex;
 		}
@@ -158,14 +159,16 @@ public class Eventos implements ActionListener {
 	}
 
 	private void guardarSelecciones() {
-		boolean seleccionHecha = false;
+		boolean seleccionHecha = true;
 
 		for(i = 0; i < opciones.length; i++) {
 			if (opciones[i].isSelected()) {
-				Operaciones.anyadirSelecciones(i + 1, listaPeriodicos.get(i), usuarioSesion);
-				seleccionHecha = true;
-			} else {
-				IO.println(i);
+				try {
+					Operaciones.escribirHistorico(usuarioSesion, listaPeriodicos.get(i).getTn().toString(), Operaciones.prueba(listaPeriodicos.get(i).getUrlPeriodico(), listaPeriodicos.get(i).getContenedorNoticia()), listaPeriodicos.get(i).getUrlPeriodico());
+					seleccionHecha = true;
+				} catch(IOException ioe) {
+					error("Error en la carga de las selecciones");
+				}
 			}
 		}
 
@@ -242,26 +245,29 @@ public class Eventos implements ActionListener {
 	public static void cargarNoticiasUsuario(Usuario usuario) {
 		PanelUsuario.panelNoticias.removeAll(); 
 
-		String [] noticiasMostrar = new String[listaPeriodicos.size()];
+		String [] noticiasMostrar = new String[50];
+		
+		try {
+			listaHistorico = ManejoFicheros.lectura("PracticaFinalTema3/src/Historico.txt");
+		} catch(IOException ioe) {
+			error("Error la lectura del fichero Historico. Cerrando programa.");
+			Principal.v.dispose();
+			System.exit(0);
+		}
 		String idUsuario = String.valueOf(usuario.getIdUsuario());
 		int contador = 1, i = 0;
 
-		if (listaPeriodicos != null) {
-			for (Periodico p : listaPeriodicos) {
-				String[] selecciones = p.getSelecciones();
-                                
-				if ((selecciones != null) && Arrays.asList(selecciones).contains(idUsuario)) {
-					try {
-						String titular = Operaciones.prueba(p.getUrlPeriodico(), p.getContenedorNoticia());
-						noticiasMostrar[i] = titular;
-
-						JLabel titularLabel = new JLabel(contador + ". [" + p.getTn().toString() + "] " + titular);
-						PanelUsuario.panelNoticias.add(titularLabel);
-						contador++;
-						i++;
-					} catch (IOException e) {
-						error("Error en el cargado de noticias.");
-					}
+		if (listaHistorico != null) {
+			for (i = 0; i < listaHistorico.size(); i++) {
+   				String selecciones = listaHistorico.get(i)[0];
+          
+				if ((selecciones != null) && selecciones.contains(idUsuario)) {
+					String titular = listaHistorico.get(i)[3];
+					noticiasMostrar[i] = titular;
+					
+					JLabel titularLabel = new JLabel(contador + ". [" + listaHistorico.get(i)[2] + "] " + titular);
+					PanelUsuario.panelNoticias.add(titularLabel);
+					contador++;
 				}
 			}
 		}
@@ -287,13 +293,11 @@ public class Eventos implements ActionListener {
 		int noticiasGuardadas = 0;
 		String idUsuario = String.valueOf(usuarioSesion.getIdUsuario());
 		
-		for (Periodico p : listaPeriodicos) {
-			String[] selecciones = p.getSelecciones();
-			
-			if ((selecciones != null) && Arrays.asList(selecciones).contains(idUsuario)) {
+		for (i = 0; i < listaHistorico.size(); i++) {
+			if (listaHistorico.get(i)[0].contains(idUsuario)) {
 				try {
-					String titular = Operaciones.prueba(p.getUrlPeriodico(), p.getContenedorNoticia());
-					Operaciones.escribirHistorico(usuarioSesion, p, titular);
+					String titular = listaHistorico.get(i)[0];
+					Operaciones.escribirHistorico(usuarioSesion, listaHistorico.get(i)[0], titular, listaHistorico.get(i)[4]);
 					noticiasGuardadas++;      
 				} catch (IOException ioe) {
 					error("Error en el guardado historico");
