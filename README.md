@@ -9,3 +9,6 @@ Hasta ahora, se encuentra disponible:
 
 - **Desarrollo de Interfaces**
     1. Práctica final (proximamente).
+
+## ¡Advertencia!
+Este repositorio desaparecerá el 14 de Febrero del 2026.
