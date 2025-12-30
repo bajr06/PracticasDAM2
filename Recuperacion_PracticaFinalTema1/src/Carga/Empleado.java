@@ -7,7 +7,8 @@ public class Empleado implements Serializable {
 	private String nombre;
 	private String contrasenya;
 	private String cargo;
-	
+
+
 	public int getIdentificacion() {
 		return identificacion;
 	}
@@ -35,13 +36,15 @@ public class Empleado implements Serializable {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	
+
+
 	public Empleado(int identificacion, String nombre, String contrasenya, String cargo) {
 		this.identificacion = identificacion;
 		this.nombre = nombre;
 		this.contrasenya = contrasenya;
 		this.cargo = cargo;
 	}
+
 
 	@Override
 	public String toString() {

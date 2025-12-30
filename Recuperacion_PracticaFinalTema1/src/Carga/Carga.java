@@ -19,13 +19,10 @@ import org.xml.sax.SAXException;
 
 
 public class Carga {
-	public static ArrayList<Planta> cargaPlantasXML() {
-		File ficheroXML = new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/plantas.xml");
+	public static ArrayList<Planta> cargaPlantasXML(File ficheroXML) {
 		ArrayList<Planta> plantas = new ArrayList<>();
 
 		try {
-			Comprobacion.comprobacionExistenciaFichero(ficheroXML);
-			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newDefaultInstance();
 			DocumentBuilder docB = dbf.newDocumentBuilder();
 			Document doc = docB.parse(ficheroXML);
@@ -51,7 +48,8 @@ public class Carga {
 				}
 			}
 		} catch(ParserConfigurationException | SAXException | IOException pcsaxioe) {
-			pcsaxioe.printStackTrace();
+			System.err.println(pcsaxioe.getMessage() +", cerrando programa.");
+			System.exit(0);
 		}
 
 		return plantas;
@@ -61,8 +59,6 @@ public class Carga {
 		File ficheroDAT = new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/plantas.dat");
 
 		try(RandomAccessFile raf = new RandomAccessFile(ficheroDAT, "r");) {
-			Comprobacion.comprobacionExistenciaFichero(ficheroDAT);
-
 			int posicion = 0;
 			
 			while(raf.getFilePointer() < raf.length()) {
@@ -74,22 +70,21 @@ public class Carga {
 				posicion++;
 			}
 		} catch(IOException ioe) {
-			ioe.printStackTrace();
+			System.err.println("Fichero " + ioe.getMessage() +", cerrando programa.");
+			System.exit(0);
 		} 
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Empleado> cargaEmpleadosDAT() {
-		File ficheroDAT = new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/empleados.dat");
+	public static ArrayList<Empleado> cargaEmpleadosDAT(File ficheroDAT) {
 		ArrayList<Empleado> empleados = new ArrayList<>();
 
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheroDAT))) {
-			Comprobacion.comprobacionExistenciaFichero(ficheroDAT);
-
 			empleados = (ArrayList<Empleado>) ois.readObject();
 
 		} catch (IOException | ClassNotFoundException iocnfe) {
-			iocnfe.printStackTrace();
+			System.err.println("Fichero " + iocnfe.getMessage() +", cerrando programa.");
+			System.exit(0);
 		}
 
 		return empleados;
