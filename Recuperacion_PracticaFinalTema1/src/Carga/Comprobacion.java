@@ -6,28 +6,38 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import Objetos.Empleado;
+
 public class Comprobacion {
+	private static File [] ficheros = {
+		new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga"),
+		new File("Recuperacion_PracticaFinalTema1/src/Ventas"),
+		new File("Recuperacion_PracticaFinalTema1/src/Devoluciones"),
+		new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/plantas.xml"),
+		new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/plantas.dat"),
+		new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/empleados.dat"),
+	};
+
 	public static File [] comprobacionExistenciaFicheros() throws IOException {
-		File [] ficheros = {
-			new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/"),
-			new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/plantas.xml"),
-			new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/plantas.dat"),
-			new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/empleados.dat")
-		};
+			for(int i = 3; i < ficheros.length; i++) {
+				if(ficheros[0].exists()) {
+					if(!ficheros[i].exists()) {
+						ficheros[i].createNewFile();
 
-		for(File fichero: ficheros) {
-			if(ficheros[0].exists()) {
-				if(!fichero.exists()) {
-					fichero.createNewFile();
-
-					IO.println("Nuevos ficheros creados, posible error.");
+						IO.println("Nuevos ficheros creados, posible error.");
+					} else if(!ficheros[0].exists()){
+						ficheros[0].mkdir();
+						IO.println("Nuevo directorio creado, posible error.");
+						comprobacionExistenciaFicheros();
+					} else if(!ficheros[1].exists()) {
+						ficheros[1].mkdir();
+						comprobacionExistenciaFicheros();
+					} else if(!ficheros[2].exists()) {
+						ficheros[2].mkdir();
+						comprobacionExistenciaFicheros();
+					}
 				}
-			} else {
-				ficheros[0].mkdir();
-
-				IO.println("Nuevo directorio creado, posible error.");
 			}
-		}
 
 		return ficheros;
 	}

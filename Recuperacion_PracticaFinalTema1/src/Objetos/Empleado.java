@@ -1,8 +1,8 @@
-package Carga;
+package Objetos;
 
 import java.io.Serializable;
 
-public class Empleado implements Serializable {
+public class Empleado implements Serializable, Estado {
 	private int identificacion;
 	private String nombre;
 	private String contrasenya;
@@ -49,5 +49,16 @@ public class Empleado implements Serializable {
 	@Override
 	public String toString() {
 		return "Empleado [Identificacion = " + identificacion + ", Nombre = " + nombre + ", Contraseña = " + contrasenya + ", Cargo = " + cargo + "]";
+	}
+
+	
+	@Override
+	public void darAlta() {
+
+	}
+
+	@Override
+	public void darBaja() {
+
 	}
 }

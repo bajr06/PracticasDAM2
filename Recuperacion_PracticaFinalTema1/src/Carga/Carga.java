@@ -17,6 +17,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import Objetos.Empleado;
+import Objetos.Planta;
+
 
 public class Carga {
 	public static ArrayList<Planta> cargaPlantasXML(File ficheroXML) {
@@ -43,8 +46,6 @@ public class Carga {
 					String descripcion = planta.getElementsByTagName("descripcion").item(0).getTextContent();
 
 					plantas.add(new Planta(codigo, nombre, foto, descripcion));
-				} else {
-					IO.println("No se ha encontrado nada.");
 				}
 			}
 		} catch(ParserConfigurationException | SAXException | IOException pcsaxioe) {
