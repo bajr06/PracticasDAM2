@@ -17,8 +17,8 @@ public class MenuVendedor {
 
 	public static int seleccionAccionV() throws NoSuchElementException {
 		IO.println("¿Qué acción deseas hacer?");
-		IO.println("Venta");
-		IO.println("Compra");
+		IO.println("1. Venta");
+		IO.println("2. Devolucion");
 
 		return s.nextInt();
 	}
@@ -31,6 +31,12 @@ public class MenuVendedor {
 
 	public static int seleccionCantidadV() throws NoSuchElementException {
 		IO.println("¿Qué cantidad vas a vender?");
+
+		return s.nextInt();
+	}
+
+	public static int cantidadPlantasVenta() throws NoSuchElementException {
+		IO.println("¿Qué cantidad de plantas vas a vender?");
 
 		return s.nextInt();
 	}

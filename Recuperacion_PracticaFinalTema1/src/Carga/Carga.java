@@ -84,7 +84,7 @@ public class Carga {
 			empleados = (ArrayList<Empleado>) ois.readObject();
 
 		} catch (IOException | ClassNotFoundException iocnfe) {
-			System.err.println("Fichero " + iocnfe.getMessage() +", cerrando programa.");
+			System.err.println("Error en fichero de empleados (" + iocnfe.getMessage() +"), cerrando programa.");
 			System.exit(0);
 		}
 

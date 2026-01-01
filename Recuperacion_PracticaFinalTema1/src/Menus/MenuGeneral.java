@@ -9,9 +9,9 @@ import Objetos.Empleado;
 import Objetos.Planta;
 
 public class MenuGeneral {
-	private static void ejecutarAccionesVendedor(int seleccion, ArrayList<Planta> plantas, File [] ficheros) {
+	private static void ejecutarAccionesVendedor(Empleado empleado, int seleccion, ArrayList<Planta> plantas, File [] ficheros) {
 		if(seleccion == 1) {
-			AccionesVendedor.realizarVenta(plantas, ficheros[1]);
+			AccionesVendedor.realizarVenta(empleado, plantas, ficheros);
 		} else if(seleccion == 2) {
 			AccionesVendedor.realizarDevolucion(plantas, ficheros[2]);
 		} else {
@@ -19,16 +19,20 @@ public class MenuGeneral {
 		}
 	}
 
-	private static void ejecutarOpcionesVendedor(int seleccion, ArrayList<Planta> plantas, File [] ficheros) {
-		if(seleccion == 1) {
-			AccionesVendedor.mostrarPlantas(plantas);
-		} else if(seleccion == 2) {
-			ejecutarAccionesVendedor(MenuVendedor.seleccionAccionV(), plantas, ficheros);
-		} else if(seleccion == 3) {
+	private static void ejecutarOpcionesVendedor(Empleado empleado, int seleccion, ArrayList<Planta> plantas, File [] ficheros) {
+		do {
+			if(seleccion == 1) {
+				AccionesVendedor.mostrarPlantas(plantas);
+			} else if(seleccion == 2) {
+				ejecutarAccionesVendedor(empleado, MenuVendedor.seleccionAccionV(), plantas, ficheros);
+			} else if(seleccion == 3) {
 
-		} else {
-			System.out.println("Opción no existente, intentelo de nuevo");
-		}
+			} else {
+				System.out.println("Opción no existente, intentelo de nuevo");
+			}
+
+			seleccion = MenuVendedor.seleccionOpcionV();
+		} while(seleccion >= 1 && seleccion <= 4);
 	}
 
 	private static void ejecutarOpcionesMenuGestor(int seleccion) {
@@ -47,7 +51,7 @@ public class MenuGeneral {
 		try {
 			switch (tipoUsuario.getCargo()) {
 				case "vendedor":
-					ejecutarOpcionesVendedor(MenuVendedor.seleccionOpcionV(), plantas, ficheros);					
+					ejecutarOpcionesVendedor(tipoUsuario, MenuVendedor.seleccionOpcionV(), plantas, ficheros);					
 					break;
 				case "gestor":
 					ejecutarOpcionesMenuGestor(MenuGestor.seleccionOpcionG());
