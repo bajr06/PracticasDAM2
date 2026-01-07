@@ -50,7 +50,7 @@ public class Carga {
 			}
 		} catch(ParserConfigurationException | SAXException | IOException pcsaxioe) {
 			System.err.println(pcsaxioe.getMessage() +", cerrando programa.");
-			System.exit(0);
+			System.exit(1);
 		}
 
 		return plantas;
@@ -72,7 +72,7 @@ public class Carga {
 			}
 		} catch(IOException ioe) {
 			System.err.println("Fichero " + ioe.getMessage() +", cerrando programa.");
-			System.exit(0);
+			System.exit(1);
 		} 
 	}
 
@@ -85,7 +85,7 @@ public class Carga {
 
 		} catch (IOException | ClassNotFoundException iocnfe) {
 			System.err.println("Error en fichero de empleados (" + iocnfe.getMessage() +"), cerrando programa.");
-			System.exit(0);
+			System.exit(1);
 		}
 
 		return empleados;

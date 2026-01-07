@@ -6,10 +6,12 @@ import java.util.NoSuchElementException;
 import Carga.Carga;
 import Carga.Comprobacion;
 import Menus.MenuGeneral;
+import Modificacion.Modificacion;
 import Objetos.Empleado;
 import Objetos.Planta;
 
 public class Principal {
+	public final static int EXIT_SUCCESS = 0, EXIT_FAILURE = 1;
 	private static File [] ficheros;
 	private static ArrayList<Planta> plantas;
 	private static ArrayList<Empleado> empleados;
@@ -23,11 +25,14 @@ public class Principal {
 
 			empleados = Carga.cargaEmpleadosDAT(ficheros[5]);
 		} catch(IOException ioe) {
-			System.err.println("Error en la carga de los ficheros.\n Valor devuelto: " + ioe.getMessage());
+			System.err.println("Error en la carga de los ficheros.\n Valor devuelto: \"" + ioe.getMessage() + "\"\n Cerrando programa\n");
+			System.exit(EXIT_FAILURE);
 		}
 	}
 
 	private static void ejecucionMenu() {
+		IO.println("¡Bienvenido al vivero C+#!");
+
 		try {
 			Empleado tipoUsuario;
 
@@ -41,8 +46,22 @@ public class Principal {
 		}
 	}
 
+	private static void modificacionDatos() {
+		try {
+			Modificacion.modificarPlantasXML(ficheros[3], plantas);
+			Modificacion.modificarPlantasDAT(ficheros[4], plantas);
+			Modificacion.modificarEmpleadoDAT(ficheros[5], empleados);
+		} catch(IOException ioe) {
+			System.err.println("Error en la carga de los datos cambiados en la aplicación: \"" + ioe.getMessage() + "\"\n Cerrando Programa.\n");
+			System.exit(EXIT_FAILURE);
+		}
+	}
+
 	public static void main(String[] args) {
 		cargaDatos();
+
 		ejecucionMenu();
+
+		modificacionDatos();
 	}
 }

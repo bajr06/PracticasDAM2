@@ -62,14 +62,14 @@ public class Comprobacion {
 
 			for(Empleado e: empleados) {
 				if(e.getIdentificacion() == (int)datos[0] && e.getContrasenya().equals((String)datos[1])) {
-					System.out.println("Sesión iniciado correctamente, bienvenid@ " + e.getNombre());							
+					System.out.println("\nSesión iniciado correctamente, bienvenid@ " + e.getNombre());							
 					return e;
 				}
 			}
 
-			IO.println("Usuario no existente, intentelo de nuevo");
+			IO.println("Usuario no existente, intentelo de nuevo\n");
 		} catch(NoSuchElementException nsee) {
-			System.err.println("Entrada incorrecta ha devuelto " + nsee.getMessage() + "\nInserte los datos según se le pida.");
+			System.err.println("Entrada incorrecta ha devuelto " + nsee.getMessage() + "\nInserte los datos según se le pida.\n");
 		}
 
 		return null;

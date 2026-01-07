@@ -2,7 +2,8 @@ package Objetos;
 
 import java.io.Serializable;
 
-public class Empleado implements Serializable, Estado {
+public class Empleado implements Serializable {
+	private static final long serialVersionUID = -6208250307443975431L;
 	private int identificacion;
 	private String nombre;
 	private String contrasenya;
@@ -49,16 +50,5 @@ public class Empleado implements Serializable, Estado {
 	@Override
 	public String toString() {
 		return "Empleado [Identificacion = " + identificacion + ", Nombre = " + nombre + ", Contraseña = " + contrasenya + ", Cargo = " + cargo + "]";
-	}
-
-	
-	@Override
-	public void darAlta() {
-
-	}
-
-	@Override
-	public void darBaja() {
-
 	}
 }

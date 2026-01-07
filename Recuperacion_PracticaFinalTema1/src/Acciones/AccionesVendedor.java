@@ -1,6 +1,8 @@
 package Acciones;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -11,42 +13,27 @@ import Objetos.Empleado;
 import Objetos.Planta;
 
 public class AccionesVendedor {
-	private static int contarFicherosVD(File directorioVentas, File directorioDevoluciones) {
-		String [] listaVentas = directorioVentas.list();
-		String [] listaDevoluciones = directorioDevoluciones.list();
-		int cont1 = 0, cont2 =0;
-		
-		for(String ventas: listaVentas) {
-			IO.println(ventas + " " + cont1);
-			cont1++;
-		}
-
-		for(String devoluciones: listaDevoluciones) {
-			IO.println(devoluciones);
-			cont2++;
-		}
-
-		return cont1 + cont2;
-	}
-
 	public static void mostrarPlantas(ArrayList<Planta> plantas) {
 		for (Planta planta : plantas) {
 			System.out.println(planta.toString());
 		}
+
+		IO.println();
 	}
 
 	private static void crearTicket(Empleado empleado, Planta [] plantas, int [] cantidades, File [] ficheros) {
-		int cantidadFicheros = contarFicherosVD(ficheros[1], ficheros[2]);
-		String ruta = "Recuperacion_PracticaFinalTema1/src/Ventas/" + "TicketV_" + cantidadFicheros + ".txt";
-		File nuevoTicket = new File(ruta);
+		int cantidadFicheros = AccionesGenerales.contarFicherosVD(ficheros[1], ficheros[2]);
+		File nuevoTicket = new File("Recuperacion_PracticaFinalTema1/src/Ventas/" + cantidadFicheros + ".txt");
 		float precioTotal = 0;
 
-		try(PrintWriter pw = new PrintWriter(nuevoTicket)) {
+		try {
 			if(!nuevoTicket.createNewFile()) {
 				System.out.println("¡Cuidado! Parece ser que hay tickets que han sido eliminados...");
 				System.out.println("Cerrando programa.");
 				System.exit(0);
 			}
+
+			PrintWriter pw = new PrintWriter(nuevoTicket);
 
 			pw.printf("Número Ticket: %d\n", cantidadFicheros);
 			pw.printf("------------------------------//------------------------------\n");
@@ -61,6 +48,8 @@ public class AccionesVendedor {
 			}
 			pw.printf("------------------------------//------------------------------\n");
 			pw.printf("Total: %f\n", precioTotal);
+
+			pw.close();
 		} catch(IOException ioe) {
 			System.err.println("Error: " + ioe + ": Directorio o fichero no existente.");
 		}
@@ -97,18 +86,117 @@ public class AccionesVendedor {
 					System.out.println("Revise primero si hay disponibilidad de la planta a vender e intenta realizar una venta nuevamente.\n");
 					return;
 				}
+
+				IO.println();
+
 			}
 
-			crearTicket(empleado, plantasAVender, cantidades, directorio);
+			if(MenuVendedor.confirmar()) {
+				crearTicket(empleado, plantasAVender, cantidades, directorio);
+			} else {
+				System.out.println("Operación cancelada\n");
+			}
 		} catch(NoSuchElementException nsee) {
 			System.err.println("Entrada incorrecta ha devuelto " + nsee.getMessage() + "\nInserte los datos según se le pida.\n");
 		}
 	}
 
-	public static void realizarDevolucion(ArrayList<Planta> plantas, File directorio) {
+	private static void crearDevolucion(ArrayList<Planta> plantas, ArrayList<String> lineasAntiguoTicket, Object [][] cantidades, File [] ficheros, File antiguoTicket) {
+		int cantidadFicheros = AccionesGenerales.contarFicherosVD(ficheros[1], ficheros[2]);
+		File nuevaDevolucion = new File("Recuperacion_PracticaFinalTema1/src/Devoluciones/" + cantidadFicheros + ".txt");
+		float precioTotal = 0;
+
+		try {
+			if(!nuevaDevolucion.createNewFile()) {
+				System.out.println("¡Cuidado! Parece ser que hay tickets que han sido eliminados...");
+				System.out.println("Cerrando programa.");
+				System.exit(0);
+			}
+
+			BufferedWriter bw = new BufferedWriter(new FileWriter(nuevaDevolucion));
+
+			for(int i = 0; i < lineasAntiguoTicket.size() - 1; i++) {
+				bw.write(lineasAntiguoTicket.get(i) + "\n");
+				if(i == lineasAntiguoTicket.size() - 3) {
+					for(int j = 0; j < cantidades.length; j++) {
+						bw.write(cantidades[j][0] + "\t\t\t\t\t\t" + cantidades[j][1] + "\t\t\t\t\t -" + cantidades[j][2] + "\n");
+
+						for(Planta p: plantas) {
+							if((int) cantidades[j][0] == p.getCodigo()) {
+								p.setCantidad((int) cantidades[j][1] + p.getCantidad());
+							}
+						}
+
+						precioTotal -= (float) cantidades[j][2];
+					}
+				}
+			}
+
+			bw.write("Total = " + precioTotal + "€\n");
+			bw.close();
+		} catch(IOException ioe) {
+			System.err.println("Error: " + ioe + ": Directorio o fichero no existente.");
+		}
+	}
+
+	public static void realizarDevolucion(ArrayList<Planta> plantas, File [] directorio) {
+		try {
+			int seleccion = MenuVendedor.seleccionTicket();
+			File fichero = new File("Recuperacion_PracticaFinalTema1/src/Ventas/"+ seleccion + ".txt");
+
+			if(fichero.exists()) {
+				ArrayList<ArrayList<String>> ticket = AccionesGenerales.buscarCodigoFichero(fichero);
+
+				int contador = 0;
+				Object [][] sublineas = new Object[3][ticket.get(1).size()];
+				String [] sublineasTemporal1;
+				String [] sublineasTemporal2;
+
+				for(String linea: ticket.get(1)) {
+					sublineasTemporal1 = linea.split("\t\t\t\t\t\t");
+					sublineasTemporal2 = sublineasTemporal1[1].split("\t\t\t\t\t");
+					
+					sublineas[contador][0] = Integer.parseInt(sublineasTemporal1[0]);
+					sublineas[contador][1] = Integer.parseInt(sublineasTemporal2[0]);
+					sublineas[contador][2] = Float.parseFloat(sublineasTemporal2[1]);
+
+					contador++;
+				}
+
+				crearDevolucion(plantas, ticket.get(0), sublineas, directorio, fichero);
+			} else {
+				System.out.println("El ticket con la numeración que usted busca, no existe.");
+			}
+
+			IO.println();
+
+		} catch(NoSuchElementException nsee) {
+			System.err.println("Entrada incorrecta ha devuelto " + nsee.getMessage() + "\nInserte los datos según se le pida.\n");
+		} catch(IOException ioe) {
+			System.err.println("Error en la lectura del fichero: " + ioe.getMessage() + "\n");
+		}
 	}
 
 	public static void buscarTicket(File [] ficheros) {
-		
+		try {
+			int busqueda = MenuVendedor.seleccionTicket();
+			File ficheroBuscadoV = new File("Recuperacion_PracticaFinalTema1/src/Ventas/" + busqueda + ".txt");
+			File ficheroBuscadoD = new File("Recuperacion_PracticaFinalTema1/src/Devoluciones/" + busqueda + ".txt");
+
+			if(ficheroBuscadoV.exists()) {
+				AccionesGenerales.leerFichero(ficheroBuscadoV);
+			} else if(ficheroBuscadoD.exists()) {
+				AccionesGenerales.leerFichero(ficheroBuscadoD);
+			} else if(!ficheroBuscadoV.exists() && !ficheroBuscadoD.exists()) {
+				System.out.println("El ticket con la numeración que usted busca, no existe.");
+			}
+
+			IO.println();
+			
+		} catch(NoSuchElementException nsee) {
+			System.err.println("Entrada incorrecta ha devuelto " + nsee.getMessage() + "\nInserte los datos según se le pida.\n");
+		} catch(IOException ioe) {
+			System.err.println("Error en la lectura del fichero: " + ioe.getMessage() + "\n");
+		}
 	}
 }

@@ -1,6 +1,6 @@
 package Objetos;
 
-public class Planta implements Estado {
+public class Planta {
 	private int codigo;
 	private String nombre;
 	private String foto;
@@ -63,16 +63,5 @@ public class Planta implements Estado {
 	@Override
 	public String toString() {
 		return "Planta [Código = " + codigo + ", Nombre = " + nombre + ", Foto = " + foto + ", Descripción = " + descripcion + ", Precio = " + precio + ", Cantidad = " + cantidad + "]";
-	}
-
-
-	@Override
-	public void darAlta() {
-
-	}
-
-	@Override
-	public void darBaja() {
-		
 	}
 }

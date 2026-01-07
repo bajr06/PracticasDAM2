@@ -13,7 +13,7 @@ public class MenuGeneral {
 		if(seleccion == 1) {
 			AccionesVendedor.realizarVenta(empleado, plantas, ficheros);
 		} else if(seleccion == 2) {
-			AccionesVendedor.realizarDevolucion(plantas, ficheros[2]);
+			AccionesVendedor.realizarDevolucion(plantas, ficheros);
 		} else {
 			System.out.println("Opción no existente, intentelo de nuevo");
 		}
@@ -26,13 +26,13 @@ public class MenuGeneral {
 			} else if(seleccion == 2) {
 				ejecutarAccionesVendedor(empleado, MenuVendedor.seleccionAccionV(), plantas, ficheros);
 			} else if(seleccion == 3) {
-
+				AccionesVendedor.buscarTicket(ficheros);
 			} else {
 				System.out.println("Opción no existente, intentelo de nuevo");
 			}
 
 			seleccion = MenuVendedor.seleccionOpcionV();
-		} while(seleccion >= 1 && seleccion <= 4);
+		} while(seleccion >= 1 && seleccion <= 3);
 	}
 
 	private static void ejecutarOpcionesMenuGestor(int seleccion) {
