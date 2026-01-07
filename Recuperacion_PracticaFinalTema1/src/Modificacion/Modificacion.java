@@ -48,9 +48,10 @@ public class Modificacion {
 	}
 
 	public static void modificarPlantasDAT(File fichero, ArrayList<Planta> plantas) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(fichero, "r");
+		RandomAccessFile raf = new RandomAccessFile(fichero, "rw");
 		
 		for(int i = 0; i < plantas.size(); i++) {
+			raf.writeInt(plantas.get(i).getCodigo());
 			raf.writeFloat(plantas.get(i).getPrecio());
 			raf.writeInt(plantas.get(i).getCantidad());
 		}

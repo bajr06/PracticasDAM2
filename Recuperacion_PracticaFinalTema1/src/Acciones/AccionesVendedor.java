@@ -47,7 +47,7 @@ public class AccionesVendedor {
 				plantas[i].setCantidad(plantas[i].getCantidad() - cantidades[i]);
 			}
 			pw.printf("------------------------------//------------------------------\n");
-			pw.printf("Total: %f\n", precioTotal);
+			pw.println("Total: " + precioTotal);
 
 			pw.close();
 		} catch(IOException ioe) {
@@ -102,8 +102,7 @@ public class AccionesVendedor {
 	}
 
 	private static void crearDevolucion(ArrayList<Planta> plantas, ArrayList<String> lineasAntiguoTicket, Object [][] cantidades, File [] ficheros, File antiguoTicket) {
-		int cantidadFicheros = AccionesGenerales.contarFicherosVD(ficheros[1], ficheros[2]);
-		File nuevaDevolucion = new File("Recuperacion_PracticaFinalTema1/src/Devoluciones/" + cantidadFicheros + ".txt");
+		File nuevaDevolucion = new File("Recuperacion_PracticaFinalTema1/src/Devoluciones/" + antiguoTicket.getName());
 		float precioTotal = 0;
 
 		try {
@@ -123,7 +122,7 @@ public class AccionesVendedor {
 
 						for(Planta p: plantas) {
 							if((int) cantidades[j][0] == p.getCodigo()) {
-								p.setCantidad((int) cantidades[j][1] + p.getCantidad());
+								p.setCantidad((int)cantidades[j][1] + p.getCantidad());
 							}
 						}
 
@@ -134,6 +133,8 @@ public class AccionesVendedor {
 
 			bw.write("Total = " + precioTotal + "€\n");
 			bw.close();
+
+			antiguoTicket.delete();
 		} catch(IOException ioe) {
 			System.err.println("Error: " + ioe + ": Directorio o fichero no existente.");
 		}
@@ -148,7 +149,7 @@ public class AccionesVendedor {
 				ArrayList<ArrayList<String>> ticket = AccionesGenerales.buscarCodigoFichero(fichero);
 
 				int contador = 0;
-				Object [][] sublineas = new Object[3][ticket.get(1).size()];
+				Object [][] sublineas = new Object[ticket.get(1).size()][3];
 				String [] sublineasTemporal1;
 				String [] sublineasTemporal2;
 
@@ -163,7 +164,11 @@ public class AccionesVendedor {
 					contador++;
 				}
 
-				crearDevolucion(plantas, ticket.get(0), sublineas, directorio, fichero);
+				if(MenuVendedor.confirmar()) {
+					crearDevolucion(plantas, ticket.get(0), sublineas, directorio, fichero);
+				} else {
+					System.out.println("Operación cancelada\n");
+				}	
 			} else {
 				System.out.println("El ticket con la numeración que usted busca, no existe.");
 			}

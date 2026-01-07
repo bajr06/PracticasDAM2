@@ -13,12 +13,12 @@ public class AccionesGenerales {
 		int cont1 = 0, cont2 =0;
 		
 		for(String ventas: listaVentas) {
-			IO.println(ventas + " " + cont1);
+			ventas.getBytes();
 			cont1++;
 		}
 
 		for(String devoluciones: listaDevoluciones) {
-			IO.println(devoluciones);
+			devoluciones.getBytes();
 			cont2++;
 		}
 

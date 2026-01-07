@@ -67,7 +67,6 @@ public class Carga {
 					plantas.get(posicion).setPrecio(raf.readFloat());
 					plantas.get(posicion).setCantidad(raf.readInt());;
 				}
-
 				posicion++;
 			}
 		} catch(IOException ioe) {
