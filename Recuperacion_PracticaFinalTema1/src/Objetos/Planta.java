@@ -59,7 +59,16 @@ public class Planta {
 		this.descripcion = descripcion;
 	}
 
+	public Planta(int codigo, String nombre, String foto, String descripcion, float precio, int cantidad) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.foto = foto;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.cantidad = cantidad;
+	}
 
+	
 	@Override
 	public String toString() {
 		return "Planta [Código = " + codigo + ", Nombre = " + nombre + ", Foto = " + foto + ", Descripción = " + descripcion + ", Precio = " + precio + ", Cantidad = " + cantidad + "]";

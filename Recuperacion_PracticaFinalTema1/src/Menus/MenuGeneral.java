@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import Acciones.AccionesGestor;
 import Acciones.AccionesVendedor;
 import Objetos.Empleado;
 import Objetos.Planta;
@@ -34,17 +35,31 @@ public class MenuGeneral {
 			seleccion = MenuVendedor.seleccionOpcionV();
 		} while(seleccion >= 1 && seleccion <= 3);
 	}
-
-	private static void ejecutarOpcionesMenuGestor(int seleccion) {
+	
+	private static void ejecutarAccionesGestor(int seleccion, ArrayList<Planta> plantas) {
 		if(seleccion == 1) {
-
+			AccionesGestor.darAlta(plantas);
 		} else if(seleccion == 2) {
-
-		} else if(seleccion == 3) {
-
+			AccionesGestor.darBaja(plantas);
 		} else {
 			System.out.println("Opción no existente, intentelo de nuevo");
 		}
+	}
+
+	private static void ejecutarOpcionesMenuGestor(int seleccion, ArrayList<Planta> plantas, ArrayList<Empleado> empleados, File [] ficheros) {
+		do {
+			if(seleccion == 1) {
+				ejecutarAccionesGestor(MenuGestor.seleccionOpcionGP(), plantas);
+			} else if(seleccion == 2) {
+
+			} else if(seleccion == 3) {
+
+			} else {
+				System.out.println("Opción no existente, intentelo de nuevo");
+			}
+
+			seleccion = MenuGestor.seleccionOpcionG();
+		} while(seleccion >= 1 && seleccion <= 3);
 	}
 
 	public static void ejecutarMenu(Empleado tipoUsuario, ArrayList<Planta> plantas, ArrayList<Empleado> empleados, File [] ficheros) {
@@ -54,7 +69,7 @@ public class MenuGeneral {
 					ejecutarOpcionesVendedor(tipoUsuario, MenuVendedor.seleccionOpcionV(), plantas, ficheros);					
 					break;
 				case "gestor":
-					ejecutarOpcionesMenuGestor(MenuGestor.seleccionOpcionG());
+					ejecutarOpcionesMenuGestor(MenuGestor.seleccionOpcionG(), plantas, empleados, ficheros);
 					break;
 				default:
 					System.err.println("El empleado no tiene categoría existente, no se puede ejecutar.");

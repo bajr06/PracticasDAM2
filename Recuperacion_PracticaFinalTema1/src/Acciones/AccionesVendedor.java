@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import Menus.MenuVendedor;
+import Modificacion.Baja;
 import Objetos.Empleado;
 import Objetos.Planta;
 
@@ -96,6 +97,8 @@ public class AccionesVendedor {
 			} else {
 				System.out.println("Operación cancelada\n");
 			}
+
+			Baja.darBajaPlantas(plantas);
 		} catch(NoSuchElementException nsee) {
 			System.err.println("Entrada incorrecta ha devuelto " + nsee.getMessage() + "\nInserte los datos según se le pida.\n");
 		}
