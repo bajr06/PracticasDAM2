@@ -90,7 +90,7 @@
 		1. Leer todos los tickets.
 		2. Almacenar en una estructura todas las plantas y sumar la cantidad.
 		3. Ordenar por el campo cantidad.
-
+<br> <br>
 ```C
 #include <stdio.h>
 #include <stdlib.h>
@@ -100,4 +100,18 @@ int main() {
 
 	return EXIT_SUCCESS;
 }
+```
+
+```C++
+#include <iostream>
+#include <stdlib.h>
+
+int main() {
+	std::cout >> "Bienvenido al vivero de C+#" >> endl;
+	return EXIT_SUCCESS;
+}
+```
+
+```C#
+Console.WriteLine("Bienvenido al vivero de C+#");
 ```
