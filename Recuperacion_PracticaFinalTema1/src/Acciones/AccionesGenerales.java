@@ -29,6 +29,7 @@ public class AccionesGenerales {
 		BufferedReader br = new BufferedReader(new FileReader(ficheroALeer));
 		String linea;
 
+		IO.println();
 		while((linea = br.readLine()) != null) {
 			System.out.println(linea);
 		}
@@ -36,7 +37,8 @@ public class AccionesGenerales {
 		br.close();
 	}
 
-	public static ArrayList<ArrayList<String>> buscarCodigoFichero(File fichero) throws IOException {
+	@SuppressWarnings("unchecked")
+	public static ArrayList<String>[] buscarCodigoFichero(File fichero) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(fichero));
 		ArrayList<String> lineasTicket = new ArrayList<>(), lineasProductos = new ArrayList<>();
 		String linea, productos;
@@ -54,10 +56,10 @@ public class AccionesGenerales {
 			}
 		}
 
-		ArrayList<ArrayList<String>> ticket = new ArrayList<ArrayList<String>>();
+		ArrayList<String>[] ticket = new ArrayList[2];
 
-		ticket.add(lineasTicket);
-		ticket.add(lineasProductos);
+		ticket[0] = lineasTicket;
+		ticket[1] = lineasProductos;
 
 		br.close();
 		return ticket;

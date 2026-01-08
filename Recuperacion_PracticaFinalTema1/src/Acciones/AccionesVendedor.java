@@ -149,14 +149,14 @@ public class AccionesVendedor {
 			File fichero = new File("Recuperacion_PracticaFinalTema1/src/Ventas/"+ seleccion + ".txt");
 
 			if(fichero.exists()) {
-				ArrayList<ArrayList<String>> ticket = AccionesGenerales.buscarCodigoFichero(fichero);
+				ArrayList<String>[] ticket = AccionesGenerales.buscarCodigoFichero(fichero);
 
 				int contador = 0;
-				Object [][] sublineas = new Object[ticket.get(1).size()][3];
-				String [] sublineasTemporal1;
-				String [] sublineasTemporal2;
+				Object[][] sublineas = new Object[ticket[1].size()][3];
+				String[] sublineasTemporal1;
+				String[] sublineasTemporal2;
 
-				for(String linea: ticket.get(1)) {
+				for(String linea: ticket[1]) {
 					sublineasTemporal1 = linea.split("\t\t\t\t\t\t");
 					sublineasTemporal2 = sublineasTemporal1[1].split("\t\t\t\t\t");
 					
@@ -168,7 +168,7 @@ public class AccionesVendedor {
 				}
 
 				if(MenuVendedor.confirmar()) {
-					crearDevolucion(plantas, ticket.get(0), sublineas, directorio, fichero);
+					crearDevolucion(plantas, ticket[0], sublineas, directorio, fichero);
 				} else {
 					System.out.println("Operación cancelada\n");
 				}	
