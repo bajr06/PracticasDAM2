@@ -12,9 +12,6 @@ public class Planta {
 	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
 
 	public String getNombre() {
 		return nombre;
@@ -26,15 +23,9 @@ public class Planta {
 	public String getFoto() {
 		return foto;
 	}
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
 
 	public String getDescripcion() {
 		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 
 	public float getPrecio() {

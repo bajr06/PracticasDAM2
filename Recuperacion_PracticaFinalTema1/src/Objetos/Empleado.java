@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Empleado implements Serializable {
 	private static final long serialVersionUID = -6208250307443975431L;
+	
 	private int identificacion;
 	private String nombre;
 	private String contrasenya;
@@ -37,7 +38,7 @@ public class Empleado implements Serializable {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-
+	
 
 	public Empleado(int identificacion, String nombre, String contrasenya, String cargo) {
 		this.identificacion = identificacion;
