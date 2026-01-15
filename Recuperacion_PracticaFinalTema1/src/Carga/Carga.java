@@ -56,9 +56,7 @@ public class Carga {
 		return plantas;
 	}
 
-	public static void cargaPlantasDAT(ArrayList<Planta> plantas) {
-		File ficheroDAT = new File("Recuperacion_PracticaFinalTema1/src/FicherosCarga/plantas.dat");
-
+	public static void cargaPlantasDAT(ArrayList<Planta> plantas, File ficheroDAT) {
 		try(RandomAccessFile raf = new RandomAccessFile(ficheroDAT, "r");) {
 			int posicion = 0;
 			

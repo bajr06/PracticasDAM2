@@ -1,10 +1,7 @@
 package Acciones;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -12,6 +9,7 @@ import Menus.MenuVendedor;
 import Modificacion.Baja;
 import Objetos.Empleado;
 import Objetos.Planta;
+import Objetos.Recibo;
 
 public class AccionesVendedor {
 	public static void mostrarPlantas(ArrayList<Planta> plantas) {
@@ -22,43 +20,18 @@ public class AccionesVendedor {
 		IO.println();
 	}
 
-	private static void crearTicket(Empleado empleado, Planta [] plantas, int [] cantidades, File [] ficheros) {
-		int cantidadFicheros = AccionesGenerales.contarFicherosVD(ficheros[1], ficheros[2]);
-		File nuevoTicket = new File("Recuperacion_PracticaFinalTema1/src/Ventas/" + cantidadFicheros + ".txt");
-		float precioTotal = 0;
+	private static int contarFicherosVD(File [] directorios) {
+		String [] listaVentas = directorios[2].list();
+		String [] listaDevoluciones = directorios[3].list();
+		int cont1, cont2;
+		
+		for(cont1 = 0; cont1 < listaVentas.length; cont1++);
+		for(cont2 = 0; cont2 < listaDevoluciones.length; cont2++);
 
-		try {
-			if(!nuevoTicket.createNewFile()) {
-				System.out.println("¡Cuidado! Parece ser que hay tickets que han sido eliminados...");
-				System.out.println("Cerrando programa.");
-				System.exit(0);
-			}
-
-			PrintWriter pw = new PrintWriter(nuevoTicket);
-
-			pw.printf("Número Ticket: %d\n", cantidadFicheros);
-			pw.printf("------------------------------//------------------------------\n");
-			pw.printf("Identificador del Empleado que ha atendido: %s\n", empleado.getIdentificacion());
-			pw.printf("Nombre del empleado: %s\n", empleado.getNombre());
-			pw.printf("Codigo_Producto			Cantidad			Precio_Unitario\n");
-			for(int i = 0; i < plantas.length; i++) {
-				pw.println(plantas[i].getCodigo() + "\t\t\t\t\t\t" + cantidades[i] + "\t\t\t\t\t" + (cantidades[i] * plantas[i].getPrecio()));
-
-				precioTotal += cantidades[i] * plantas[i].getPrecio();
-				plantas[i].setCantidad(plantas[i].getCantidad() - cantidades[i]);
-			}
-			pw.printf("------------------------------//------------------------------\n");
-			pw.println("Total: " + precioTotal);
-
-			pw.close();
-		} catch(IOException ioe) {
-			System.err.println("Error: " + ioe + ": Directorio o fichero no existente.");
-		}
-
-		IO.println("Venta realizada correctamente :)\n");
+		return cont1 + cont2;
 	}
 
-	public static void realizarVenta(Empleado empleado, ArrayList<Planta> plantas, File [] directorio) {
+	public static void realizarVenta(Empleado empleado, ArrayList<Planta> plantas, File [] directorios) {
 		int cantidadPlantasVendidas = MenuVendedor.cantidadPlantasVenta();
 		int [] cantidades = new int[cantidadPlantasVendidas];
 		Planta [] plantasAVender = new Planta[cantidadPlantasVendidas];
@@ -93,7 +66,8 @@ public class AccionesVendedor {
 			}
 
 			if(MenuVendedor.confirmar()) {
-				crearTicket(empleado, plantasAVender, cantidades, directorio);
+				Recibo ticket = new Recibo(empleado, plantasAVender, cantidades);
+				ticket.generarTicket(contarFicherosVD(directorios), directorios[2].getName());
 			} else {
 				System.out.println("Operación cancelada\n");
 			}
@@ -104,74 +78,14 @@ public class AccionesVendedor {
 		}
 	}
 
-	private static void crearDevolucion(ArrayList<Planta> plantas, ArrayList<String> lineasAntiguoTicket, Object [][] cantidades, File [] ficheros, File antiguoTicket) {
-		File nuevaDevolucion = new File("Recuperacion_PracticaFinalTema1/src/Devoluciones/" + antiguoTicket.getName());
-		float precioTotal = 0;
-
+	public static void realizarDevolucion(Recibo ticket) {
 		try {
-			if(!nuevaDevolucion.createNewFile()) {
-				System.out.println("¡Cuidado! Parece ser que hay tickets que han sido eliminados...");
-				System.out.println("Cerrando programa.");
-				System.exit(0);
-			}
-
-			BufferedWriter bw = new BufferedWriter(new FileWriter(nuevaDevolucion));
-
-			for(int i = 0; i < lineasAntiguoTicket.size() - 1; i++) {
-				bw.write(lineasAntiguoTicket.get(i) + "\n");
-				if(i == lineasAntiguoTicket.size() - 3) {
-					for(int j = 0; j < cantidades.length; j++) {
-						bw.write(cantidades[j][0] + "\t\t\t\t\t\t" + cantidades[j][1] + "\t\t\t\t\t -" + cantidades[j][2] + "\n");
-
-						for(Planta p: plantas) {
-							if((int) cantidades[j][0] == p.getCodigo()) {
-								p.setCantidad((int)cantidades[j][1] + p.getCantidad());
-							}
-						}
-
-						precioTotal -= (float) cantidades[j][2];
-					}
-				}
-			}
-
-			bw.write("Total = " + precioTotal + "€\n");
-			bw.close();
-
-			antiguoTicket.delete();
-		} catch(IOException ioe) {
-			System.err.println("Error: " + ioe + ": Directorio o fichero no existente.");
-		}
-	}
-
-	public static void realizarDevolucion(ArrayList<Planta> plantas, File [] directorio) {
-		try {
-			int seleccion = MenuVendedor.seleccionTicket();
-			File fichero = new File("Recuperacion_PracticaFinalTema1/src/Ventas/"+ seleccion + ".txt");
-
-			if(fichero.exists()) {
-				ArrayList<String>[] ticket = AccionesGenerales.buscarCodigoFichero(fichero);
-
-				int contador = 0;
-				Object[][] sublineas = new Object[ticket[1].size()][3];
-				String[] sublineasTemporal1;
-				String[] sublineasTemporal2;
-
-				for(String linea: ticket[1]) {
-					sublineasTemporal1 = linea.split("\t\t\t\t\t\t");
-					sublineasTemporal2 = sublineasTemporal1[1].split("\t\t\t\t\t");
-					
-					sublineas[contador][0] = Integer.parseInt(sublineasTemporal1[0]);
-					sublineas[contador][1] = Integer.parseInt(sublineasTemporal2[0]);
-					sublineas[contador][2] = Float.parseFloat(sublineasTemporal2[1]);
-
-					contador++;
-				}
-
+			if(ticket.getFichero().exists()) {
 				if(MenuVendedor.confirmar()) {
-					crearDevolucion(plantas, ticket[0], sublineas, directorio, fichero);
+					ticket.generarDevolucion(ticket.getNumeroTicket(), null);
 				} else {
 					System.out.println("Operación cancelada\n");
-				}	
+				}
 			} else {
 				System.out.println("El ticket con la numeración que usted busca, no existe.");
 			}
@@ -180,8 +94,6 @@ public class AccionesVendedor {
 
 		} catch(NoSuchElementException nsee) {
 			System.err.println("Entrada incorrecta ha devuelto " + nsee.getMessage() + "\nInserte los datos según se le pida.\n");
-		} catch(IOException ioe) {
-			System.err.println("Error en la lectura del fichero: " + ioe.getMessage() + "\n");
 		}
 	}
 

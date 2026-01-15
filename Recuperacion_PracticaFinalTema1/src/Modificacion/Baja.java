@@ -31,12 +31,12 @@ public class Baja {
 
 		try(RandomAccessFile raf = new RandomAccessFile("Recuperacion_PracticaFinalTema1/src/FicherosBaja/plantasBaja.dat", "rw")) {
 			for (int i = 0; i < plantas.size(); i++) {
-			if(plantas.get(i).getCantidad() == 0) {
-				raf.writeInt(plantas.get(i).getCodigo());
-				raf.writeFloat(plantas.get(i).getPrecio());
+				if(plantas.get(i).getCantidad() == 0) {
+					raf.writeInt(plantas.get(i).getCodigo());
+					raf.writeFloat(plantas.get(i).getPrecio());
 
-				plantas.get(i).setPrecio(0);
-			}
+					plantas.get(i).setPrecio(0);
+				}
 		}
 		} catch (IOException ioe) {
 			ioe.printStackTrace();

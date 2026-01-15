@@ -13,9 +13,9 @@ public class MenuGeneral {
 	private static void ejecutarAccionesVendedor(Empleado empleado, int seleccion, ArrayList<Planta> plantas, File [] ficheros) {
 		if(seleccion == 1) {
 			AccionesVendedor.realizarVenta(empleado, plantas, ficheros);
-		} else if(seleccion == 2) {
+		} /* else if(seleccion == 2) {
 			AccionesVendedor.realizarDevolucion(plantas, ficheros);
-		} else {
+		} */ else {
 			System.out.println("Opción no existente, intentelo de nuevo");
 		}
 	}

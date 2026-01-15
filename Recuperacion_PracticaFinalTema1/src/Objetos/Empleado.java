@@ -38,7 +38,7 @@ public class Empleado implements Serializable {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	
+
 
 	public Empleado(int identificacion, String nombre, String contrasenya, String cargo) {
 		this.identificacion = identificacion;

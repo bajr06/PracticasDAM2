@@ -45,7 +45,6 @@ public class AccionesGestor {
 	}
 
 	public static void darBaja(ArrayList<Planta> plantas) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'darBaja'");
+		
 	}
 }

@@ -42,7 +42,7 @@ public class Planta {
 		this.cantidad = cantidad;
 	}
 
-
+	
 	public Planta(int codigo, String nombre, String foto, String descripcion) {
 		this.codigo = codigo;
 		this.nombre = nombre;
